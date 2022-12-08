@@ -539,95 +539,7 @@ let container = (0, _util.CreateNthNodes)(1);
 for(let key in 0, _util.registry)console.log((0, _util.registry)[key]);
 document.body.appendChild(container);
 
-},{"./src/util":"7wzGb","./src/box/index":"3964P"}],"7wzGb":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "registry", ()=>registry);
-parcelHelpers.export(exports, "Div", ()=>Div);
-parcelHelpers.export(exports, "CreateNthNodes", ()=>CreateNthNodes);
-const registry = {};
-const Div = (options)=>{
-    let { w , h , bg , c , txt  } = options;
-    let div = document.createElement("div");
-    const uuid = ()=>Math.random() * 10e10;
-    div.id = `${uuid()}`;
-    div.style.width = `${w?.[0]}${w?.[1]}`;
-    div.style.height = `${h?.[0]}${h?.[1]}`;
-    div.style.backgroundColor = bg ? bg : "black";
-    div.style.color = c ? c : "white";
-    div.style.border = "2px solid " + (c ? c : bg);
-    if (txt) div.textContent = txt;
-    if (registry[div.id]) registry[div.id] = div;
-    return div;
-};
-const CreateNthNodes = (n)=>{
-    let colors = [
-        "#212121",
-        "#fefefe"
-    ];
-    let container = Div({
-        w: [
-            800,
-            "px"
-        ],
-        h: [
-            800,
-            "px"
-        ],
-        bg: colors[0]
-    });
-    for(let i = 1; i <= n; i++){
-        let bg = colors[i % 2 === 0 ? 0 : 1];
-        let color = colors[i % 2 === 0 ? 1 : 0];
-        let el = Div({
-            w: [
-                200,
-                "px"
-            ],
-            h: [
-                200,
-                "px"
-            ],
-            bg,
-            c: color,
-            txt: `${i}`
-        });
-        container.appendChild(el);
-    }
-    return container;
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"3964P":[function(require,module,exports) {
+},{"./src/box/index":"3964P","./src/util":"7wzGb"}],"3964P":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "FlexContainer", ()=>FlexContainer);
@@ -786,7 +698,37 @@ const FlexCSS = {
     "flex-item--flex-grow": "flex-item--flex-grow"
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hkLmz":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"hkLmz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Item", ()=>Item);
@@ -841,6 +783,64 @@ const Item = (options)=>{
     };
 };
 
-},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
+},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7wzGb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "registry", ()=>registry);
+parcelHelpers.export(exports, "Div", ()=>Div);
+parcelHelpers.export(exports, "CreateNthNodes", ()=>CreateNthNodes);
+const registry = {};
+const Div = (options)=>{
+    let { w , h , bg , c , txt  } = options;
+    let div = document.createElement("div");
+    const uuid = ()=>Math.random() * 10e10;
+    div.id = `${uuid()}`;
+    div.style.width = `${w?.[0]}${w?.[1]}`;
+    div.style.height = `${h?.[0]}${h?.[1]}`;
+    div.style.backgroundColor = bg ? bg : "black";
+    div.style.color = c ? c : "white";
+    div.style.border = "2px solid " + (c ? c : bg);
+    if (txt) div.textContent = txt;
+    if (registry[div.id]) registry[div.id] = div;
+    return div;
+};
+const CreateNthNodes = (n)=>{
+    let colors = [
+        "#212121",
+        "#fefefe"
+    ];
+    let container = Div({
+        w: [
+            800,
+            "px"
+        ],
+        h: [
+            800,
+            "px"
+        ],
+        bg: colors[0]
+    });
+    for(let i = 1; i <= n; i++){
+        let bg = colors[i % 2 === 0 ? 0 : 1];
+        let color = colors[i % 2 === 0 ? 1 : 0];
+        let el = Div({
+            w: [
+                200,
+                "px"
+            ],
+            h: [
+                200,
+                "px"
+            ],
+            bg,
+            c: color,
+            txt: `${i}`
+        });
+        container.appendChild(el);
+    }
+    return container;
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
 
 //# sourceMappingURL=index.8e9bd240.js.map
