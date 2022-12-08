@@ -12,71 +12,16 @@ export const Item = (options: { container: Node, childNodeIndex: number }) => {
 
     return {
         AlignSelf(alignement: SelfAlignment = 'center') {
-            switch (alignement) {
-                case "center": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-self--flex-start"],
-                        FlexCSS["flex_align-self--flex-end"],
-                        FlexCSS["flex_align-self--baseline"],
-                        FlexCSS["flex_align-self--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-self--center"]);
-                    return this;
-                }
-
-                case "flex-start": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-self--center"],
-                        FlexCSS["flex_align-self--flex-end"],
-                        FlexCSS["flex_align-self--baseline"],
-                        FlexCSS["flex_align-self--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-self--flex-start"]);
-                    return this;
-                }
-
-                case "flex-end": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-self--center"],
-                        FlexCSS["flex_align-self--flex-start"],
-                        FlexCSS["flex_align-self--baseline"],
-                        FlexCSS["flex_align-self--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-self--flex-end"]);
-                    return this;
-                }
-
-                case "stretch": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-self--center"],
-                        FlexCSS["flex_align-self--flex-start"],
-                        FlexCSS["flex_align-self--baseline"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-self--stretch"]);
-                    return this;
-                }
-
-                case "baseline": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-self--center"],
-                        FlexCSS["flex_align-self--flex-start"],
-                        FlexCSS["flex_align-self--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-self--baseline"]);
-                    return this;
-                }
-
-                default: {
-                    element.classList.remove(
-                        FlexCSS["flex_align-self--flex-start"],
-                        FlexCSS["flex_align-self--flex-end"],
-                        FlexCSS["flex_align-self--baseline"],
-                        FlexCSS["flex_align-self--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-items--center"]);
-                    return this;
-                }
+            let a: any = {
+                "center": FlexCSS["flex_align-self--center"],
+                "flex-start": FlexCSS["flex_align-self--flex-start"],
+                "flex-end": FlexCSS["flex_align-self--flex-end"],
+                "stretch": FlexCSS["flex_align-self--stretch"],
+                "baseline": FlexCSS["flex_align-self--baseline"]
             }
+            for (let key in a) element.classList.remove(a[key]);
+            element.classList.add(a[alignement] || a['center']);
+            return this;
         },
         Order(order: number = 0) {
             if (!element.id) throw Error("No id specified");

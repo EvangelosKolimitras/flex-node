@@ -15,248 +15,54 @@ export const Container = (options: {
     return {
         Direction(direction: FlexDirection = "column") {
             if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            switch (direction) {
-                case "column": {
-                    element.classList.remove(
-                        FlexCSS["flex_direction--row"],
-                        FlexCSS["flex_direction--row-reverse"],
-                        FlexCSS["flex_direction--column-reverse"]
-                    );
-                    element.classList.add(FlexCSS["flex_direction--column"]);
-                    return this;
-                }
-
-                case "row": {
-                    element.classList.remove(
-                        FlexCSS["flex_direction--column"],
-                        FlexCSS["flex_direction--column-reverse"],
-                        FlexCSS["flex_direction--row-reverse"]
-                    );
-                    element.classList.add(FlexCSS["flex_direction--row"]);
-                    return this;
-                }
-
-                case "row-reverse": {
-                    element.classList.remove(
-                        FlexCSS["flex_direction--row"],
-                        FlexCSS["flex_direction--column"],
-                        FlexCSS["flex_direction--column-reverse"]
-                    );
-                    element.classList.add(FlexCSS["flex_direction--row-reverse"]);
-                    return this;
-                }
-
-                case "column-reverse": {
-                    element.classList.remove(
-                        FlexCSS["flex_direction--row"],
-                        FlexCSS["flex_direction--column"],
-                        FlexCSS["flex_direction--row-reverse"]
-                    );
-                    element.classList.add(FlexCSS["flex_direction--column-reverse"]);
-                    return this;
-                }
-
-                default: {
-                    element.classList.remove(FlexCSS["flex_direction--row"]);
-                    element.classList.remove(FlexCSS["flex_direction--row-reverse"]);
-                    element.classList.remove(FlexCSS["flex_direction--column-reverse"]);
-                    element.classList.add(FlexCSS["flex_direction--column"]);
-                    return this;
-                }
+            let directions: any = {
+                "column": FlexCSS["flex_direction--column"],
+                "row": FlexCSS["flex_direction--row"],
+                "row-reverse": FlexCSS["flex_direction--row-reverse"],
+                "column-reverse": FlexCSS["flex_direction--column-reverse"]
             }
+            for (let key in directions) element.classList.remove(directions[key]);
+            element.classList.add(directions[direction] || directions["column"]);
+            return this;
         },
         AlignItems(alignement: FlexAlignment = "center") {
             if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            switch (alignement) {
-                case "center": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-items--flex-start"],
-                        FlexCSS["flex_align-items--flex-end"],
-                        FlexCSS["flex_align-items--baseline"],
-                        FlexCSS["flex_align-items--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-items--center"]);
-                    return this;
-                }
-
-                case "flex-start": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-items--center"],
-                        FlexCSS["flex_align-items--flex-end"],
-                        FlexCSS["flex_align-items--baseline"],
-                        FlexCSS["flex_align-items--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-items--flex-start"]);
-                    return this;
-                }
-
-                case "flex-end": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-items--center"],
-                        FlexCSS["flex_align-items--flex-start"],
-                        FlexCSS["flex_align-items--baseline"],
-                        FlexCSS["flex_align-items--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-items--flex-end"]);
-                    return this;
-                }
-
-                case "stretch": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-items--center"],
-                        FlexCSS["flex_align-items--flex-start"],
-                        FlexCSS["flex_align-items--baseline"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-items--stretch"]);
-                    return this;
-                }
-
-                case "baseline": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-items--center"],
-                        FlexCSS["flex_align-items--flex-start"],
-                        FlexCSS["flex_align-items--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-items--baseline"]);
-                    return this;
-                }
-
-                default: {
-                    element.classList.remove(
-                        FlexCSS["flex_align-items--flex-start"],
-                        FlexCSS["flex_align-items--flex-end"],
-                        FlexCSS["flex_align-items--baseline"],
-                        FlexCSS["flex_align-items--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-items--center"]);
-                    return this;
-                }
+            let alignements: any = {
+                "center": FlexCSS["flex_align-items--center"],
+                "flex-start": FlexCSS["flex_align-items--flex-start"],
+                "flex-end": FlexCSS["flex_align-items--flex-end"],
+                "baseline": FlexCSS["flex_align-items--baseline"],
+                "stretch": FlexCSS["flex_align-items--stretch"]
             }
+            for (let key in alignements) element.classList.remove(alignements[key]);
+            element.classList.add(alignements[alignement] || alignements["center"]);
+            return this;
         },
         JustifyContent(justification: FlexJustification = "center") {
             // implement start-end left-right
             if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            switch (justification) {
-                case "center": {
-                    element.classList.remove(
-                        FlexCSS["flex_justify-content--flex-start"],
-                        FlexCSS["flex_justify-content--flex-end"],
-                        FlexCSS["flex_justify-content--space-between"],
-                        FlexCSS["flex_justify-content--space-around"],
-                        FlexCSS["flex_justify-content--space-evenly"]
-                    );
-                    element.classList.add(FlexCSS["flex_justify-content--center"]);
-                    return this;
-                }
-
-                case "flex-start": {
-                    element.classList.remove(
-                        FlexCSS["flex_justify-content--center"],
-                        FlexCSS["flex_justify-content--flex-end"],
-                        FlexCSS["flex_justify-content--space-between"],
-                        FlexCSS["flex_justify-content--space-around"],
-                        FlexCSS["flex_justify-content--space-evenly"]
-                    );
-                    element.classList.add(FlexCSS["flex_justify-content--flex-start"]);
-                    return this;
-                }
-
-                case "flex-end": {
-                    element.classList.remove(
-                        FlexCSS["flex_justify-content--flex-start"],
-                        FlexCSS["flex_justify-content--center"],
-                        FlexCSS["flex_justify-content--space-between"],
-                        FlexCSS["flex_justify-content--space-around"],
-                        FlexCSS["flex_justify-content--space-evenly"]
-                    );
-                    element.classList.add(FlexCSS["flex_justify-content--flex-end"]);
-                    return this;
-                }
-
-                case "space-between": {
-                    element.classList.remove(
-                        FlexCSS["flex_justify-content--flex-start"],
-                        FlexCSS["flex_justify-content--flex-end"],
-                        FlexCSS["flex_justify-content--center"],
-                        FlexCSS["flex_justify-content--space-around"],
-                        FlexCSS["flex_justify-content--space-evenly"]
-                    );
-                    element.classList.add(FlexCSS["flex_justify-content--space-between"]);
-                    return this;
-                }
-
-                case "space-around": {
-                    element.classList.remove(
-                        FlexCSS["flex_justify-content--flex-start"],
-                        FlexCSS["flex_justify-content--flex-end"],
-                        FlexCSS["flex_justify-content--space-between"],
-                        FlexCSS["flex_justify-content--center"],
-                        FlexCSS["flex_justify-content--space-evenly"]
-                    );
-                    element.classList.add(FlexCSS["flex_justify-content--space-around"]);
-                    return this;
-                }
-
-                case "space-evenly": {
-                    element.classList.remove(
-                        FlexCSS["flex_justify-content--flex-start"],
-                        FlexCSS["flex_justify-content--flex-end"],
-                        FlexCSS["flex_justify-content--space-between"],
-                        FlexCSS["flex_justify-content--space-around"],
-                        FlexCSS["flex_justify-content--center"],
-                    );
-                    element.classList.add(FlexCSS["flex_justify-content--space-evenly"]);
-                    return this;
-                }
-                default: {
-                    element.classList.remove(
-                        FlexCSS["flex_justify-content--flex-start"],
-                        FlexCSS["flex_justify-content--flex-end"],
-                        FlexCSS["flex_justify-content--space-between"],
-                        FlexCSS["flex_justify-content--space-around"],
-                        FlexCSS["flex_justify-content--space-evenly"]
-                    );
-                    element.classList.add(FlexCSS["flex_justify-content--center"]);
-                    return this;
-                }
+            let justifications: any = {
+                "center": FlexCSS["flex_justify-content--center"],
+                "flex-start": FlexCSS["flex_justify-content--flex-start"],
+                "flex-end": FlexCSS["flex_justify-content--flex-end"],
+                "space-between": FlexCSS["flex_justify-content--space-between"],
+                "space-around": FlexCSS["flex_justify-content--space-around"],
+                "space-evenly": FlexCSS["flex_justify-content--space-evenly"]
             }
+            for (let key in justifications) element.classList.remove(justifications[key]);
+            element.classList.add(justifications[justification] || justifications["center"]);
+            return this;
         },
         Wrap(wrap: FlexWrap = "no-wrap") {
             if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            switch (wrap) {
-                case "wrap": {
-                    element.classList.remove(
-                        FlexCSS["flex_wrap--no-wrap"],
-                        FlexCSS["flex_wrap--wrap-reverse"]
-                    );
-                    element.classList.add(FlexCSS["flex_wrap--wrap"]);
-                    return this;
-                }
-                case "no-wrap": {
-                    element.classList.remove(
-                        FlexCSS["flex_wrap--wrap"],
-                        FlexCSS["flex_wrap--wrap-reverse"]
-                    );
-                    element.classList.add(FlexCSS["flex_wrap--no-wrap"]);
-                    return this;
-                }
-                case "wrap-reverse": {
-                    element.classList.remove(
-                        FlexCSS["flex_wrap--wrap"],
-                        FlexCSS["flex_wrap--no-wrap"]
-                    );
-                    element.classList.add(FlexCSS["flex_wrap--wrap-reverse"]);
-                    return this;
-                }
-                default: {
-                    element.classList.remove(
-                        FlexCSS["flex_wrap--wrap"],
-                        FlexCSS["flex_wrap--wrap-reverse"]
-                    );
-                    element.classList.add(FlexCSS["flex_wrap--no-wrap"]);
-                    return this;
-                }
+            let wraps: any = {
+                "wrap": FlexCSS["flex_wrap--wrap"],
+                "no-wrap": FlexCSS["flex_wrap--no-wrap"],
+                "wrap-reverse": FlexCSS["flex_wrap--wrap-reverse"]
             }
+            for (let key in wraps) element.classList.remove(wraps[key]);
+            element.classList.add(wraps[wrap] || wraps["no-wrap"]);
+            return this;
         },
         Flow(
             flow: { direction?: FlexDirection; wrap?: FlexWrap } = {
@@ -271,116 +77,25 @@ export const Container = (options: {
         },
         Gap(gap?: `${string} ${string}` | string) {
             if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            if (gap)
-                element.style.gap = gap
+            element.style.gap = gap || "0px";
             return this;
         },
         AlignContent(alignement: AlignContent = "center") {
             if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            if (
-                !element.classList.contains("flex_wrap--wrap") &&
-                !element.classList.contains("flex_wrap--wrap-reverse")
-            ) {
+            if (!(element.classList.contains("flex_wrap--wrap") || element.classList.contains("flex_wrap--wrap-reverse")))
                 throw Error("Element should be wrapped or wrapped-reverese");
+            let alignements: any = {
+                "center": FlexCSS["flex_align-content--center"],
+                "flex-start": FlexCSS["flex_align-content--flex-start"],
+                "flex-end": FlexCSS["flex_align-content--flex-end"],
+                "space-between": FlexCSS["flex_align-content--space-between"],
+                "space-around": FlexCSS["flex_align-content--space-around"],
+                "space-evenly": FlexCSS["flex_align-content--space-evenly"],
+                "stretch": FlexCSS["flex_align-content--stretch"]
             }
-            switch (alignement) {
-                case "center": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--flex-start"],
-                        FlexCSS["flex_align-content--flex-end"],
-                        FlexCSS["flex_align-content--space-between"],
-                        FlexCSS["flex_align-content--space-evenly"],
-                        FlexCSS["flex_align-content--space-around"],
-                        FlexCSS["flex_align-content--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--center"]);
-                    return this;
-                }
-                case "flex-start": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--center"],
-                        FlexCSS["flex_align-content--flex-end"],
-                        FlexCSS["flex_align-content--space-between"],
-                        FlexCSS["flex_align-content--space-evenly"],
-                        FlexCSS["flex_align-content--space-around"],
-                        FlexCSS["flex_align-content--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--flex-start"]);
-                    return this;
-                }
-                case "flex-end": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--flex-start"],
-                        FlexCSS["flex_align-content--center"],
-                        FlexCSS["flex_align-content--space-between"],
-                        FlexCSS["flex_align-content--space-evenly"],
-                        FlexCSS["flex_align-content--space-around"],
-                        FlexCSS["flex_align-content--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--flex-end"]);
-                    return this;
-                }
-                case "space-between": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--flex-start"],
-                        FlexCSS["flex_align-content--flex-end"],
-                        FlexCSS["flex_align-content--center"],
-                        FlexCSS["flex_align-content--space-evenly"],
-                        FlexCSS["flex_align-content--space-around"],
-                        FlexCSS["flex_align-content--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--space-between"]);
-                    return this;
-                }
-                case "space-evenly": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--flex-start"],
-                        FlexCSS["flex_align-content--flex-end"],
-                        FlexCSS["flex_align-content--space-between"],
-                        FlexCSS["flex_align-content--center"],
-                        FlexCSS["flex_align-content--space-around"],
-                        FlexCSS["flex_align-content--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--space-evenly"]);
-                    return this;
-                }
-                case "space-around": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--flex-start"],
-                        FlexCSS["flex_align-content--flex-end"],
-                        FlexCSS["flex_align-content--space-between"],
-                        FlexCSS["flex_align-content--space-evenly"],
-                        FlexCSS["flex_align-content--center"],
-                        FlexCSS["flex_align-content--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--space-around"]);
-                    return this;
-                }
-                case "stretch": {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--flex-start"],
-                        FlexCSS["flex_align-content--flex-end"],
-                        FlexCSS["flex_align-content--space-between"],
-                        FlexCSS["flex_align-content--space-evenly"],
-                        FlexCSS["flex_align-content--space-around"],
-                        FlexCSS["flex_align-content--center"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--stretch"]);
-                    return this;
-                }
-                default: {
-                    element.classList.remove(
-                        FlexCSS["flex_align-content--flex-start"],
-                        FlexCSS["flex_align-content--flex-end"],
-                        FlexCSS["flex_align-content--space-between"],
-                        FlexCSS["flex_align-content--space-evenly"],
-                        FlexCSS["flex_align-content--space-around"],
-                        FlexCSS["flex_align-content--stretch"]
-                    );
-                    element.classList.add(FlexCSS["flex_align-content--center"]);
-                    return this;
-                }
-            }
+            for (let key in alignements) element.classList.remove(alignements[key]);
+            element.classList.add(alignements[alignement] || alignements["center"]);
+            return this;
         },
         CenterContent() {
             this.AlignItems()

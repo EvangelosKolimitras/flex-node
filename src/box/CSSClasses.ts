@@ -1,4 +1,4 @@
-export const FlexCSS = {
+export const FlexCSS: { [key: string]: string } = {
     flex: "flex",
     "flex_direction--row": "flex_direction--row",
     "flex_direction--row-reverse": "flex_direction--row-reverse",

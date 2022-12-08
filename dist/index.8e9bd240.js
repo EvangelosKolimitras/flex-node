@@ -532,12 +532,14 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"1jwFz":[function(require,module,exports) {
+var _index = require("./src/box/index");
 var _util = require("./src/util");
 let container = (0, _util.CreateNthNodes)(1);
+(0, _index.FlexContainer)(container).Wrap("wrap-reverse").Direction("row").AlignContent().JustifyContent("center").AlignItems("center");
 for(let key in 0, _util.registry)console.log((0, _util.registry)[key]);
 document.body.appendChild(container);
 
-},{"./src/util":"7wzGb"}],"7wzGb":[function(require,module,exports) {
+},{"./src/util":"7wzGb","./src/box/index":"3964P"}],"7wzGb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "registry", ()=>registry);
@@ -625,6 +627,220 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
+},{}],"3964P":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FlexContainer", ()=>FlexContainer);
+parcelHelpers.export(exports, "FlexItem", ()=>FlexItem);
+var _container = require("./Container/Container");
+var _item = require("./Item/Item");
+function FlexContainer(element) {
+    return (0, _container.Container)({
+        element
+    });
+}
+function FlexItem(options) {
+    return (0, _item.Item)({
+        ...options
+    });
+}
+
+},{"./Container/Container":"jxR7a","./Item/Item":"hkLmz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jxR7a":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Container", ()=>Container);
+var _cssclasses = require("../CSSClasses");
+const Container = (options)=>{
+    let { element  } = options;
+    if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
+    let id = element.id;
+    if (!id) throw Error("No id specified");
+    element.classList.add((0, _cssclasses.FlexCSS).flex);
+    element.setAttribute("flexContainer", `flexContainerId-${element.id}`);
+    return {
+        Direction (direction = "column") {
+            if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
+            let directions = {
+                "column": (0, _cssclasses.FlexCSS)["flex_direction--column"],
+                "row": (0, _cssclasses.FlexCSS)["flex_direction--row"],
+                "row-reverse": (0, _cssclasses.FlexCSS)["flex_direction--row-reverse"],
+                "column-reverse": (0, _cssclasses.FlexCSS)["flex_direction--column-reverse"]
+            };
+            for(let key in directions)element.classList.remove(directions[key]);
+            element.classList.add(directions[direction] || directions["column"]);
+            return this;
+        },
+        AlignItems (alignement = "center") {
+            if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
+            let alignements = {
+                "center": (0, _cssclasses.FlexCSS)["flex_align-items--center"],
+                "flex-start": (0, _cssclasses.FlexCSS)["flex_align-items--flex-start"],
+                "flex-end": (0, _cssclasses.FlexCSS)["flex_align-items--flex-end"],
+                "baseline": (0, _cssclasses.FlexCSS)["flex_align-items--baseline"],
+                "stretch": (0, _cssclasses.FlexCSS)["flex_align-items--stretch"]
+            };
+            for(let key in alignements)element.classList.remove(alignements[key]);
+            element.classList.add(alignements[alignement] || alignements["center"]);
+            return this;
+        },
+        JustifyContent (justification = "center") {
+            // implement start-end left-right
+            if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
+            let justifications = {
+                "center": (0, _cssclasses.FlexCSS)["flex_justify-content--center"],
+                "flex-start": (0, _cssclasses.FlexCSS)["flex_justify-content--flex-start"],
+                "flex-end": (0, _cssclasses.FlexCSS)["flex_justify-content--flex-end"],
+                "space-between": (0, _cssclasses.FlexCSS)["flex_justify-content--space-between"],
+                "space-around": (0, _cssclasses.FlexCSS)["flex_justify-content--space-around"],
+                "space-evenly": (0, _cssclasses.FlexCSS)["flex_justify-content--space-evenly"]
+            };
+            for(let key in justifications)element.classList.remove(justifications[key]);
+            element.classList.add(justifications[justification] || justifications["center"]);
+            return this;
+        },
+        Wrap (wrap = "no-wrap") {
+            if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
+            let wraps = {
+                "wrap": (0, _cssclasses.FlexCSS)["flex_wrap--wrap"],
+                "no-wrap": (0, _cssclasses.FlexCSS)["flex_wrap--no-wrap"],
+                "wrap-reverse": (0, _cssclasses.FlexCSS)["flex_wrap--wrap-reverse"]
+            };
+            for(let key in wraps)element.classList.remove(wraps[key]);
+            element.classList.add(wraps[wrap] || wraps["no-wrap"]);
+            return this;
+        },
+        Flow (flow = {
+            direction: "column",
+            wrap: "no-wrap"
+        }) {
+            if (!id) throw Error("No id specified");
+            this.Direction(flow.direction);
+            this.Wrap(flow.wrap);
+            return this;
+        },
+        Gap (gap) {
+            if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
+            element.style.gap = gap || "0px";
+            return this;
+        },
+        AlignContent (alignement = "center") {
+            if (!(element instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
+            if (!(element.classList.contains("flex_wrap--wrap") || element.classList.contains("flex_wrap--wrap-reverse"))) throw Error("Element should be wrapped or wrapped-reverese");
+            let alignements = {
+                "center": (0, _cssclasses.FlexCSS)["flex_align-content--center"],
+                "flex-start": (0, _cssclasses.FlexCSS)["flex_align-content--flex-start"],
+                "flex-end": (0, _cssclasses.FlexCSS)["flex_align-content--flex-end"],
+                "space-between": (0, _cssclasses.FlexCSS)["flex_align-content--space-between"],
+                "space-around": (0, _cssclasses.FlexCSS)["flex_align-content--space-around"],
+                "space-evenly": (0, _cssclasses.FlexCSS)["flex_align-content--space-evenly"],
+                "stretch": (0, _cssclasses.FlexCSS)["flex_align-content--stretch"]
+            };
+            for(let key in alignements)element.classList.remove(alignements[key]);
+            element.classList.add(alignements[alignement] || alignements["center"]);
+            return this;
+        },
+        CenterContent () {
+            this.AlignItems();
+            this.JustifyContent();
+            return this;
+        }
+    };
+};
+
+},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dwadV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FlexCSS", ()=>FlexCSS);
+const FlexCSS = {
+    flex: "flex",
+    "flex_direction--row": "flex_direction--row",
+    "flex_direction--row-reverse": "flex_direction--row-reverse",
+    "flex_direction--column": "flex_direction--column",
+    "flex_direction--column-reverse": "flex_direction--column-reverse",
+    "flex_align-items--center": "flex_align-items--center",
+    "flex_align-items--flex-end": "flex_align-items--flex-end",
+    "flex_align-items--flex-start": "flex_align-items--flex-start",
+    "flex_align-items--stretch": "flex_align-items--stretch",
+    "flex_align-items--baseline": "flex_align-items--baseline",
+    "flex_align-self--center": "flex_align-self--center",
+    "flex_align-self--flex-end": "flex_align-self--flex-end",
+    "flex_align-self--flex-start": "flex_align-self--flex-start",
+    "flex_align-self--stretch": "flex_align-self--stretch",
+    "flex_align-self--baseline": "flex_align-self--baseline",
+    "flex_justify-content--flex-start": "flex_justify-content--flex-start",
+    "flex_justify-content--flex-end": "flex_justify-content--flex-end",
+    "flex_justify-content--center": "flex_justify-content--center",
+    "flex_justify-content--space-between": "flex_justify-content--space-between",
+    "flex_justify-content--space-around": "flex_justify-content--space-around",
+    "flex_justify-content--space-evenly": "flex_justify-content--space-evenly",
+    "flex_wrap--no-wrap": "flex_wrap--no-wrap",
+    "flex_wrap--wrap": "flex_wrap--wrap",
+    "flex_wrap--wrap-reverse": "flex_wrap--wrap-reverse",
+    "flex_align-content--flex-start": "flex_align-content--flex-start",
+    "flex_align-content--flex-end": "flex_align-content--flex-end",
+    "flex_align-content--center": "flex_align-content--center",
+    "flex_align-content--space-between": "flex_align-content--space-between",
+    "flex_align-content--space-evenly": "flex_align-content--space-evenly",
+    "flex_align-content--space-around": "flex_align-content--space-around",
+    "flex_align-content--stretch": "flex_align-content--stretch",
+    "flex-item--flex-grow": "flex-item--flex-grow"
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hkLmz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Item", ()=>Item);
+var _cssclasses = require("../CSSClasses");
+const Item = (options)=>{
+    let { container , childNodeIndex  } = options;
+    let childNodes = Array.from(container.childNodes);
+    let len = childNodes.length;
+    let element;
+    if (childNodeIndex < 1 || childNodeIndex > len) throw Error("Index out of bounds");
+    element = childNodes[childNodeIndex - 1];
+    return {
+        AlignSelf (alignement = "center") {
+            let a = {
+                "center": (0, _cssclasses.FlexCSS)["flex_align-self--center"],
+                "flex-start": (0, _cssclasses.FlexCSS)["flex_align-self--flex-start"],
+                "flex-end": (0, _cssclasses.FlexCSS)["flex_align-self--flex-end"],
+                "stretch": (0, _cssclasses.FlexCSS)["flex_align-self--stretch"],
+                "baseline": (0, _cssclasses.FlexCSS)["flex_align-self--baseline"]
+            };
+            for(let key in a)element.classList.remove(a[key]);
+            element.classList.add(a[alignement] || a["center"]);
+            return this;
+        },
+        Order (order = 0) {
+            if (!element.id) throw Error("No id specified");
+            if (!element.classList.contains("flex")) throw Error("Parent is not flexed");
+            element.style.order = `${order}`;
+            return this;
+        },
+        Flex (flex) {
+            if (!element.id) throw Error("No id specified");
+            if (!element.classList.contains("flex")) throw Error("Parent is not flexed");
+            let { grow , shrink , basis  } = flex;
+            function growHandler(grow) {
+                element.classList.add("flex-item--flex-grow");
+                element.style.setProperty("--flex-grow", grow.toString());
+            }
+            function shrinkHandler(shrink) {
+                element.classList.add("flex-item--flex-shrink");
+                element.style.setProperty("--flex-shrink", shrink.toString());
+            }
+            function basisHandler(options) {
+                let { value , unit  } = options;
+                element.classList.add("flex-item--flex-basis");
+                element.style.setProperty("--flex-basis", unit ? value.toString().concat(unit) : value.toString());
+            }
+            if (grow) growHandler(grow);
+            if (shrink) shrinkHandler(shrink);
+            if (basis) basisHandler(basis);
+        }
+    };
+};
+
+},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
 
 //# sourceMappingURL=index.8e9bd240.js.map
