@@ -12,12 +12,6 @@ export const Container = (options: {
     node.classList.add(FlexCSS.flex);
     node.setAttribute("flexContainer", `flexContainerId-${node.id}`);
 
-    if (!(node instanceof HTMLElement))
-        throw Error("Element must be an HTMLElement");
-    let children = node.children;
-    for (let i = 0; i < children.length; i++)
-        children[i].classList.add(FlexCSS["flex_item"]);
-
     return {
         Direction(direction: FlexDirection = "column") {
             if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");

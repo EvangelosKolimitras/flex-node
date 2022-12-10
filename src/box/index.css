@@ -10,7 +10,11 @@ body {
   font-family: sans-serif;
   width: 100vw;
   height: 100vh;
-  background-color: #414141;
+  background: linear-gradient(45deg, #be9a4b, #228991);
+}
+
+body:first-child {
+  transition: 1s all;
 }
 
 .flex {

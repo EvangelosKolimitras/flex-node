@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npx parcel index.html",
-    "tsc": "npx tsc --noEmit"
+    "tsc": "npx tsc --noEmit",
+    "fix-parcel": "npx parcel index.html --no-cache"
   },
   "type": "module",
   "keywords": [
