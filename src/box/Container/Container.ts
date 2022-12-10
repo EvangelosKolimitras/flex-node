@@ -12,6 +12,12 @@ export const Container = (options: {
     node.classList.add(FlexCSS.flex);
     node.setAttribute("flexContainer", `flexContainerId-${node.id}`);
 
+    if (!(node instanceof HTMLElement))
+        throw Error("Element must be an HTMLElement");
+    let children = node.children;
+    for (let i = 0; i < children.length; i++)
+        children[i].classList.add(FlexCSS["flex_item"]);
+
     return {
         Direction(direction: FlexDirection = "column") {
             if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
@@ -54,7 +60,7 @@ export const Container = (options: {
             node.classList.add(justifications[justification] || justifications["center"]);
             return this;
         },
-        Wrap(wrap: FlexWrap = "no-wrap") {
+        Wrap(wrap: FlexWrap = "wrap") {
             if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
             let wraps: any = {
                 "wrap": FlexCSS["flex_wrap--wrap"],
@@ -68,8 +74,8 @@ export const Container = (options: {
         },
         Flow(
             flow: { direction?: FlexDirection; wrap?: FlexWrap } = {
-                direction: "column",
-                wrap: "wrap"
+                direction: "row",
+                wrap: "no-wrap"
             }
         ) {
             if (!id) throw Error("No id specified");
@@ -135,6 +141,6 @@ export const Container = (options: {
             if (wrap) this.Wrap(wrap);
             if (wrap !== "no-wrap") this.AlignContent(alignContent);
             return this
-        }
+        },
     };
 };

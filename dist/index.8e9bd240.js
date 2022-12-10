@@ -532,210 +532,66 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"1jwFz":[function(require,module,exports) {
-var _index = require("./src/box/index");
 var _util = require("./src/util");
-let container = (0, _util.CreateNthNodes)(9);
-(0, _index.FlexContainer)(container);
-(0, _index.FlexItem)({
-    container,
-    at: [
-        4
-    ]
-}).AlignSelf("center");
+let container = (0, _util.CreateNthNodes)(12);
 document.body.appendChild(container);
 
-},{"./src/box/index":"3964P","./src/util":"7wzGb"}],"3964P":[function(require,module,exports) {
+},{"./src/util":"7wzGb"}],"7wzGb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "FlexContainer", ()=>FlexContainer);
-parcelHelpers.export(exports, "FlexItem", ()=>FlexItem);
-var _container = require("./Container/Container");
-var _item = require("./Item/Item");
-function FlexContainer(node) {
-    return (0, _container.Container)({
-        node
-    });
-}
-function FlexItem(options) {
-    return (0, _item.Item)({
-        ...options
-    });
-}
-
-},{"./Container/Container":"jxR7a","./Item/Item":"hkLmz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jxR7a":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Container", ()=>Container);
-var _cssclasses = require("../CSSClasses");
-let isElementWrapped = false;
-const Container = (options)=>{
-    let { node  } = options;
-    if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-    let id = node.id;
-    if (!id) throw Error("No id specified");
-    node.classList.add((0, _cssclasses.FlexCSS).flex);
-    node.setAttribute("flexContainer", `flexContainerId-${node.id}`);
-    return {
-        Direction (direction = "column") {
-            if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            let directions = {
-                "column": (0, _cssclasses.FlexCSS)["flex_direction--column"],
-                "row": (0, _cssclasses.FlexCSS)["flex_direction--row"],
-                "row-reverse": (0, _cssclasses.FlexCSS)["flex_direction--row-reverse"],
-                "column-reverse": (0, _cssclasses.FlexCSS)["flex_direction--column-reverse"]
-            };
-            for(let key in directions)node.classList.remove(directions[key]);
-            node.classList.add(directions[direction] || directions["column"]);
-            return this;
-        },
-        AlignItems (alignement = "center") {
-            if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            let alignements = {
-                "center": (0, _cssclasses.FlexCSS)["flex_align-items--center"],
-                "flex-start": (0, _cssclasses.FlexCSS)["flex_align-items--flex-start"],
-                "flex-end": (0, _cssclasses.FlexCSS)["flex_align-items--flex-end"],
-                "baseline": (0, _cssclasses.FlexCSS)["flex_align-items--baseline"],
-                "stretch": (0, _cssclasses.FlexCSS)["flex_align-items--stretch"]
-            };
-            for(let key in alignements)node.classList.remove(alignements[key]);
-            node.classList.add(alignements[alignement] || alignements["center"]);
-            return this;
-        },
-        JustifyContent (justification = "center") {
-            // implement start-end left-right
-            if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            let justifications = {
-                "center": (0, _cssclasses.FlexCSS)["flex_justify-content--center"],
-                "flex-start": (0, _cssclasses.FlexCSS)["flex_justify-content--flex-start"],
-                "flex-end": (0, _cssclasses.FlexCSS)["flex_justify-content--flex-end"],
-                "space-between": (0, _cssclasses.FlexCSS)["flex_justify-content--space-between"],
-                "space-around": (0, _cssclasses.FlexCSS)["flex_justify-content--space-around"],
-                "space-evenly": (0, _cssclasses.FlexCSS)["flex_justify-content--space-evenly"]
-            };
-            for(let key in justifications)node.classList.remove(justifications[key]);
-            node.classList.add(justifications[justification] || justifications["center"]);
-            return this;
-        },
-        Wrap (wrap = "no-wrap") {
-            if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            let wraps = {
-                "wrap": (0, _cssclasses.FlexCSS)["flex_wrap--wrap"],
-                "no-wrap": (0, _cssclasses.FlexCSS)["flex_wrap--no-wrap"],
-                "wrap-reverse": (0, _cssclasses.FlexCSS)["flex_wrap--wrap-reverse"]
-            };
-            for(let key in wraps)node.classList.remove(wraps[key]);
-            node.classList.add(wraps[wrap] || wraps["no-wrap"]);
-            isElementWrapped = true;
-            return this;
-        },
-        Flow (flow = {
-            direction: "column",
-            wrap: "wrap"
-        }) {
-            if (!id) throw Error("No id specified");
-            if (flow.wrap) this.Wrap(flow.wrap);
-            if (flow.direction) this.Direction(flow.direction);
-            return this;
-        },
-        Gap (gap) {
-            if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            node.style.gap = gap || "0px";
-            return this;
-        },
-        AlignContent (alignement = "center") {
-            console.log({
-                isElementWrapped
-            });
-            if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
-            if (!isElementWrapped || !(node.classList.contains("flex_wrap--wrap") || node.classList.contains("flex_wrap--wrap-reverse"))) throw Error("Element should have wrap or wrap-reverse class to use align-content, use Wrap() method to set wrap or wrap-reverse class to element before using AlignContent() method or use Flow() method to set both direction and wrap at once.");
-            let alignements = {
-                "center": (0, _cssclasses.FlexCSS)["flex_align-content--center"],
-                "flex-start": (0, _cssclasses.FlexCSS)["flex_align-content--flex-start"],
-                "flex-end": (0, _cssclasses.FlexCSS)["flex_align-content--flex-end"],
-                "space-between": (0, _cssclasses.FlexCSS)["flex_align-content--space-between"],
-                "space-around": (0, _cssclasses.FlexCSS)["flex_align-content--space-around"],
-                "space-evenly": (0, _cssclasses.FlexCSS)["flex_align-content--space-evenly"],
-                "stretch": (0, _cssclasses.FlexCSS)["flex_align-content--stretch"]
-            };
-            for(let key in alignements)node.classList.remove(alignements[key]);
-            node.classList.add(alignements[alignement] || alignements["center"]);
-            return this;
-        },
-        Center (wrap = "wrap", alignContent = "center") {
-            this.AlignItems();
-            this.JustifyContent();
-            this.AlignContent(alignContent);
-            return this;
-        },
-        CenterLeft (wrap = "no-wrap", alignContent = "center") {
-            this.AlignItems();
-            this.JustifyContent("flex-start");
-            if (wrap) this.Wrap(wrap);
-            if (wrap !== "no-wrap") this.AlignContent(alignContent);
-            return this;
-        },
-        CenterRight (wrap = "no-wrap", alignContent = "center") {
-            this.AlignItems();
-            this.JustifyContent("flex-end");
-            if (wrap) this.Wrap(wrap);
-            if (wrap !== "no-wrap") this.AlignContent(alignContent);
-            return this;
-        },
-        CenterTop (wrap = "no-wrap", alignContent = "center") {
-            this.AlignItems("flex-start");
-            this.JustifyContent();
-            if (wrap) this.Wrap(wrap);
-            if (wrap !== "no-wrap") this.AlignContent(alignContent);
-            return this;
-        },
-        CenterBottom (wrap = "no-wrap", alignContent = "center") {
-            this.AlignItems("flex-end");
-            this.JustifyContent();
-            if (wrap) this.Wrap(wrap);
-            if (wrap !== "no-wrap") this.AlignContent(alignContent);
-            return this;
-        }
-    };
+parcelHelpers.export(exports, "registry", ()=>registry);
+parcelHelpers.export(exports, "Node", ()=>Node);
+parcelHelpers.export(exports, "CreateNthNodes", ()=>CreateNthNodes);
+const registry = {};
+const Node = (options)=>{
+    let { w , h , bg , c , txt  } = options;
+    let div = document.createElement("div");
+    const uuid = ()=>Math.random() * 10e10;
+    div.id = `${uuid()}`;
+    div.style.width = `${w?.[0]}${w?.[1]}`;
+    div.style.height = `${h?.[0]}${h?.[1]}`;
+    div.style.backgroundColor = bg ? bg : "black";
+    div.style.color = c ? c : "white";
+    div.style.border = "2px solid " + (c ? c : bg);
+    if (txt) div.textContent = txt;
+    if (registry[div.id]) registry[div.id] = div;
+    return div;
 };
-
-},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dwadV":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "FlexCSS", ()=>FlexCSS);
-const FlexCSS = {
-    flex: "flex",
-    flex_item: "flex_item",
-    "flex_direction--row": "flex_direction--row",
-    "flex_direction--row-reverse": "flex_direction--row-reverse",
-    "flex_direction--column": "flex_direction--column",
-    "flex_direction--column-reverse": "flex_direction--column-reverse",
-    "flex_align-items--center": "flex_align-items--center",
-    "flex_align-items--flex-end": "flex_align-items--flex-end",
-    "flex_align-items--flex-start": "flex_align-items--flex-start",
-    "flex_align-items--stretch": "flex_align-items--stretch",
-    "flex_align-items--baseline": "flex_align-items--baseline",
-    "flex_align-self--center": "flex_align-self--center",
-    "flex_align-self--flex-end": "flex_align-self--flex-end",
-    "flex_align-self--flex-start": "flex_align-self--flex-start",
-    "flex_align-self--stretch": "flex_align-self--stretch",
-    "flex_align-self--baseline": "flex_align-self--baseline",
-    "flex_justify-content--flex-start": "flex_justify-content--flex-start",
-    "flex_justify-content--flex-end": "flex_justify-content--flex-end",
-    "flex_justify-content--center": "flex_justify-content--center",
-    "flex_justify-content--space-between": "flex_justify-content--space-between",
-    "flex_justify-content--space-around": "flex_justify-content--space-around",
-    "flex_justify-content--space-evenly": "flex_justify-content--space-evenly",
-    "flex_wrap--no-wrap": "flex_wrap--no-wrap",
-    "flex_wrap--wrap": "flex_wrap--wrap",
-    "flex_wrap--wrap-reverse": "flex_wrap--wrap-reverse",
-    "flex_align-content--flex-start": "flex_align-content--flex-start",
-    "flex_align-content--flex-end": "flex_align-content--flex-end",
-    "flex_align-content--center": "flex_align-content--center",
-    "flex_align-content--space-between": "flex_align-content--space-between",
-    "flex_align-content--space-evenly": "flex_align-content--space-evenly",
-    "flex_align-content--space-around": "flex_align-content--space-around",
-    "flex_align-content--stretch": "flex_align-content--stretch",
-    "flex-item--flex-grow": "flex-item--flex-grow"
+const CreateNthNodes = (n)=>{
+    let colors = [
+        "#212121",
+        "#fefefe"
+    ];
+    let container = Node({
+        w: [
+            800,
+            "px"
+        ],
+        h: [
+            800,
+            "px"
+        ],
+        bg: colors[1]
+    });
+    for(let i = 1; i <= n; i++){
+        let bg = colors[i % 2 === 0 ? 0 : 1];
+        let color = colors[i % 2 === 0 ? 1 : 0];
+        let el = Node({
+            w: [
+                200,
+                "px"
+            ],
+            h: [
+                200,
+                "px"
+            ],
+            bg,
+            c: color,
+            txt: `${i}`
+        });
+        container.appendChild(el);
+    }
+    return container;
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
@@ -768,146 +624,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"hkLmz":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Item", ()=>Item);
-var _cssclasses = require("../CSSClasses");
-const atIsANumber = (at)=>typeof at === "number";
-const Item = (options)=>{
-    let { container , at  } = options;
-    let childNodes = Array.from(container.childNodes);
-    let len = childNodes.length;
-    let element = null;
-    let elements = null;
-    if (atIsANumber(at)) {
-        if (at < 1 || at > len) throw Error(`Index out of bounds. Child count length: ${len}, Index passed: ${at}`);
-        element = childNodes[at - 1];
-        element.classList.add((0, _cssclasses.FlexCSS)["flex_item"]);
-        elements = null;
-    } else {
-        let [start, end] = at;
-        if (at.length === 1) {
-            start = at[0];
-            end = at[0];
-        }
-        if (start > end) throw Error("Start index must be less than end index");
-        if (start < 1 || end < 1) throw Error("Array index must be greater than 0");
-        if (start > len || end > len) throw Error("Array index must be less than child count length");
-        element = null;
-        elements = childNodes.slice(start - 1, end);
-    }
-    return {
-        AlignSelf (alignement = "center") {
-            let a = {
-                "center": (0, _cssclasses.FlexCSS)["flex_align-self--center"],
-                "flex-start": (0, _cssclasses.FlexCSS)["flex_align-self--flex-start"],
-                "flex-end": (0, _cssclasses.FlexCSS)["flex_align-self--flex-end"],
-                "stretch": (0, _cssclasses.FlexCSS)["flex_align-self--stretch"],
-                "baseline": (0, _cssclasses.FlexCSS)["flex_align-self--baseline"]
-            };
-            if (elements === null) {
-                for(let key in a)if (element) element.classList.remove(a[key]);
-            } else for (let el of elements)for(let key1 in a)el.classList.remove(a[key1]);
-            if (elements === null) {
-                if (element) element.classList.add(a[alignement] || a["center"]);
-            } else for (let el1 of elements)el1.classList.add(a[alignement] || a["center"]);
-            return this;
-        },
-        Order (order = 0) {
-            if (element) {
-                if (!element.id) throw Error("No id specified");
-                if (!element.classList.contains("flex")) throw Error("Parent is not flexed");
-                element.style.order = `${order}`;
-            }
-            return this;
-        },
-        Flex (flex) {
-            if (!element) return;
-            if (!element.id) throw Error("No id specified");
-            if (!element.classList.contains("flex")) throw Error("Parent is not flexed");
-            let { grow , shrink , basis  } = flex;
-            function growHandler(grow) {
-                if (!element) return;
-                element.classList.add("flex-item--flex-grow");
-                element.style.setProperty("--flex-grow", grow.toString());
-            }
-            function shrinkHandler(shrink) {
-                if (!element) return;
-                element.classList.add("flex-item--flex-shrink");
-                element.style.setProperty("--flex-shrink", shrink.toString());
-            }
-            function basisHandler(options) {
-                if (!element) return;
-                let { value , unit  } = options;
-                element.classList.add("flex-item--flex-basis");
-                element.style.setProperty("--flex-basis", unit ? value.toString().concat(unit) : value.toString());
-            }
-            if (grow) growHandler(grow);
-            if (shrink) shrinkHandler(shrink);
-            if (basis) basisHandler(basis);
-        }
-    };
-};
-
-},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7wzGb":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "registry", ()=>registry);
-parcelHelpers.export(exports, "Div", ()=>Div);
-parcelHelpers.export(exports, "CreateNthNodes", ()=>CreateNthNodes);
-const registry = {};
-const Div = (options)=>{
-    let { w , h , bg , c , txt  } = options;
-    let div = document.createElement("div");
-    const uuid = ()=>Math.random() * 10e10;
-    div.id = `${uuid()}`;
-    div.style.width = `${w?.[0]}${w?.[1]}`;
-    div.style.height = `${h?.[0]}${h?.[1]}`;
-    div.style.backgroundColor = bg ? bg : "black";
-    div.style.color = c ? c : "white";
-    div.style.border = "2px solid " + (c ? c : bg);
-    if (txt) div.textContent = txt;
-    if (registry[div.id]) registry[div.id] = div;
-    return div;
-};
-const CreateNthNodes = (n)=>{
-    let colors = [
-        "#212121",
-        "#fefefe"
-    ];
-    let container = Div({
-        w: [
-            800,
-            "px"
-        ],
-        h: [
-            800,
-            "px"
-        ],
-        bg: colors[1]
-    });
-    for(let i = 1; i <= n; i++){
-        let bg = colors[i % 2 === 0 ? 0 : 1];
-        let color = colors[i % 2 === 0 ? 1 : 0];
-        let el = Div({
-            w: [
-                200,
-                "px"
-            ],
-            h: [
-                200,
-                "px"
-            ],
-            bg,
-            c: color,
-            txt: `${i}`
-        });
-        container.appendChild(el);
-    }
-    return container;
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
+},{}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
 
 //# sourceMappingURL=index.8e9bd240.js.map
