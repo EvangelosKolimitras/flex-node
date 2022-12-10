@@ -19,7 +19,7 @@ export const Div = (options: { w?: [number, 'px' | '%'], h?: [number, 'px' | '%'
 
 export const CreateNthNodes = (n: number) => {
     let colors = ["#212121", "#fefefe"];
-    let container = Div({ w: [800, 'px'], h: [800, 'px'], bg: colors[0] });
+    let container = Div({ w: [800, 'px'], h: [800, 'px'], bg: colors[1] });
 
     for (let i = 1; i <= n; i++) {
         let bg = colors[i % 2 === 0 ? 0 : 1];

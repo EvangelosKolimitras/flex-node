@@ -1,9 +1,9 @@
 import { FlexContainer, FlexItem } from "./src/box/index";
-import { CreateNthNodes, registry } from "./src/util";
-let container = CreateNthNodes(1);
-FlexContainer(container).Wrap("wrap-reverse").Direction("row").AlignContent().JustifyContent("center").AlignItems("center");
+import { CreateNthNodes } from "./src/util";
 
-for (let key in registry)
-    console.log(registry[key]);
+let container = CreateNthNodes(9);
+FlexContainer(container);
+
+FlexItem({ container, at: [4, 6] }).AlignSelf('center');
 
 document.body.appendChild(container);

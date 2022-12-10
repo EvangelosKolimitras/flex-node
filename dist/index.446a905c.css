@@ -15,6 +15,10 @@ body {
   display: flex;
 }
 
+.flex_item {
+  flex: var(--flex-grow) var(--flex-shrink) var(--flex-basis);
+}
+
 .flex_direction--row {
   flex-direction: row;
 }

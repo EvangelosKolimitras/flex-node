@@ -1,5 +1,6 @@
 export const FlexCSS: { [key: string]: string } = {
     flex: "flex",
+    flex_item: "flex_item",
     "flex_direction--row": "flex_direction--row",
     "flex_direction--row-reverse": "flex_direction--row-reverse",
     "flex_direction--column": "flex_direction--column",
