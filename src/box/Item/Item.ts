@@ -20,7 +20,10 @@ export const Item = (options: ItemOptions) => {
         elements = null;
     } else {
         let [start, end] = at;
-
+        if (at.length === 1) {
+            start = at[0];
+            end = at[0];
+        }
         if (start > end) throw Error("Start index must be less than end index");
         if (start < 1 || end < 1) throw Error("Array index must be greater than 0");
         if (start > len || end > len) throw Error("Array index must be less than child count length");

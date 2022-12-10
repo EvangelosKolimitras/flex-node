@@ -4,6 +4,6 @@ import { CreateNthNodes } from "./src/util";
 let container = CreateNthNodes(9);
 FlexContainer(container);
 
-FlexItem({ container, at: [4, 6] }).AlignSelf('center');
+FlexItem({ container, at: [4] }).AlignSelf('center');
 
 document.body.appendChild(container);

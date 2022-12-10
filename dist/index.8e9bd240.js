@@ -539,8 +539,7 @@ let container = (0, _util.CreateNthNodes)(9);
 (0, _index.FlexItem)({
     container,
     at: [
-        4,
-        6
+        4
     ]
 }).AlignSelf("center");
 document.body.appendChild(container);
@@ -788,6 +787,10 @@ const Item = (options)=>{
         elements = null;
     } else {
         let [start, end] = at;
+        if (at.length === 1) {
+            start = at[0];
+            end = at[0];
+        }
         if (start > end) throw Error("Start index must be less than end index");
         if (start < 1 || end < 1) throw Error("Array index must be greater than 0");
         if (start > len || end > len) throw Error("Array index must be less than child count length");
