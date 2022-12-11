@@ -9,8 +9,9 @@ export const NewNode = (options: { w?: [number, 'px' | '%'], h?: [number, 'px' |
     div.style.height = `${h?.[0]}${h?.[1]}`;
     div.style.backgroundColor = bg ? bg : "black";
     div.style.color = c ? c : "white";
-    div.style.border = "2px solid " + (c ? c : bg);
+    div.style.boxShadow = "0 0 5px 0 " + (c ? c : bg);
     div.style.borderRadius = "5px";
+    div.style.fontSize = "2rem";
     if (txt)
         div.textContent = txt;
     if (registry[div.id])

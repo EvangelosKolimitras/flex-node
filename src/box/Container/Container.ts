@@ -13,6 +13,7 @@ export const Container = (options: {
     node.setAttribute("flexContainer", `flexContainerId-${node.id}`);
 
     return {
+        node,
         Direction(direction: FlexDirection = "column") {
             if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
             let directions: any = {
@@ -69,7 +70,7 @@ export const Container = (options: {
         Flow(
             flow: { direction?: FlexDirection; wrap?: FlexWrap } = {
                 direction: "row",
-                wrap: "no-wrap"
+                wrap: "wrap"
             }
         ) {
             if (!id) throw Error("No id specified");
@@ -85,10 +86,10 @@ export const Container = (options: {
             return this;
         },
         AlignContent(alignement: AlignContent = "center") {
-            console.log({ isElementWrapped });
             if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
             if (!isElementWrapped || (!(node.classList.contains("flex_wrap--wrap") || node.classList.contains("flex_wrap--wrap-reverse"))))
                 throw Error("Element should have wrap or wrap-reverse class to use align-content, use Wrap() method to set wrap or wrap-reverse class to element before using AlignContent() method or use Flow() method to set both direction and wrap at once.");
+
             let alignements: any = {
                 "center": FlexCSS["flex_align-content--center"],
                 "flex-start": FlexCSS["flex_align-content--flex-start"],
@@ -98,13 +99,17 @@ export const Container = (options: {
                 "space-evenly": FlexCSS["flex_align-content--space-evenly"],
                 "stretch": FlexCSS["flex_align-content--stretch"]
             }
-            for (let key in alignements) node.classList.remove(alignements[key]);
+
+            for (let key in alignements)
+                node.classList.remove(alignements[key]);
+
             node.classList.add(alignements[alignement] || alignements["center"]);
             return this;
         },
         Center(wrap: FlexWrap = "wrap", alignContent: AlignContent = "center") {
             this.AlignItems()
             this.JustifyContent();
+            if (wrap) this.Wrap(wrap);
             this.AlignContent(alignContent);
             return this
         },

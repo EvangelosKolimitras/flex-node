@@ -10,7 +10,7 @@ export const Item = (options: ItemOptions) => {
     let childNodes = (<Array<HTMLElement>>Array.from(container.childNodes));
     let len = childNodes.length;
     let element: HTMLElement | null = null;
-    let elements: Array<HTMLElement> | null = null
+    let elements: Array<HTMLElement> | null = null;
 
     if (atIsANumber(at)) {
         if (at < 1 || at > len)
@@ -58,6 +58,7 @@ export const Item = (options: ItemOptions) => {
             else
                 for (let el of elements)
                     el.classList.add(a[alignement] || a['center']);
+
             return this;
         },
         Order(order: number = 0) {

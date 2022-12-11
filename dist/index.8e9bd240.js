@@ -545,95 +545,49 @@ let container = (0, _util.NewNode)({
     ],
     bg: "white"
 });
+let h1 = document.createElement("h1");
+h1.innerText = "Smart Nodes";
 container.style.padding = "5px";
-(0, _util.CreateNumberOfNodes)(9).forEach((props)=>{
+document.body.id = "some id...";
+(0, _util.CreateNumberOfNodes)(9).forEach((props, index)=>{
     let node = (0, _util.NewNode)(props);
+    (0, _index.FlexContainer)(node).AlignItems().JustifyContent();
+    if (index === 4) {
+        node.textContent = "";
+        (0, _util.CreateNumberOfNodes)(3).forEach((_n, i)=>{
+            let subNode = (0, _util.NewNode)({
+                w: [
+                    50,
+                    "px"
+                ],
+                h: [
+                    50,
+                    "px"
+                ],
+                bg: "#fff",
+                c: "#9f9f9f",
+                txt: `${index}.${i}`
+            });
+            let subNode$ = (0, _index.FlexContainer)(subNode).Wrap().Center().Gap("10px");
+            node.appendChild(subNode$.node);
+        });
+        (0, _index.FlexItem)({
+            container: node,
+            at: [
+                3
+            ]
+        }).AlignSelf("flex-start");
+    }
     container.appendChild(node);
 });
-(0, _index.FlexContainer)(container).Direction("row").Wrap("wrap").AlignItems().JustifyContent().AlignContent().Gap("10px");
-document.body.id = "14sdsa";
+document.body.appendChild(h1);
 document.body.appendChild(container);
-(0, _index.FlexContainer)(document.body).Center();
+let flexBody = (0, _index.FlexContainer)(document.body);
+let flexedContainer = (0, _index.FlexContainer)(container);
+flexBody.Direction().JustifyContent().AlignItems().Gap("20px");
+flexedContainer.Direction().Wrap().JustifyContent().AlignItems().Gap("20px").AlignContent();
 
-},{"./src/util":"7wzGb","./src/box/index":"3964P"}],"7wzGb":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "registry", ()=>registry);
-parcelHelpers.export(exports, "NewNode", ()=>NewNode);
-parcelHelpers.export(exports, "CreateNumberOfNodes", ()=>CreateNumberOfNodes);
-const registry = {};
-const NewNode = (options)=>{
-    let { w , h , bg , c , txt  } = options;
-    let div = document.createElement("div");
-    const uuid = ()=>Math.random() * 10e10;
-    div.id = `${uuid()}`;
-    div.style.width = `${w?.[0]}${w?.[1]}`;
-    div.style.height = `${h?.[0]}${h?.[1]}`;
-    div.style.backgroundColor = bg ? bg : "black";
-    div.style.color = c ? c : "white";
-    div.style.border = "2px solid " + (c ? c : bg);
-    div.style.borderRadius = "5px";
-    if (txt) div.textContent = txt;
-    if (registry[div.id]) registry[div.id] = div;
-    return div;
-};
-const CreateNumberOfNodes = (n)=>{
-    let colors = [
-        "#fafafa",
-        "lightblue"
-    ];
-    let props = [];
-    for(let i = 1; i <= n; i++){
-        let bg = colors[i % 2 === 0 ? 0 : 1];
-        let color = colors[i % 2 === 0 ? 1 : 0];
-        props.push({
-            w: [
-                200,
-                "px"
-            ],
-            h: [
-                200,
-                "px"
-            ],
-            bg,
-            c: color,
-            txt: `${i}`
-        });
-    }
-    return props;
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"3964P":[function(require,module,exports) {
+},{"./src/box/index":"3964P","./src/util":"7wzGb"}],"3964P":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "FlexContainer", ()=>FlexContainer);
@@ -665,6 +619,7 @@ const Container = (options)=>{
     node.classList.add((0, _cssclasses.FlexCSS).flex);
     node.setAttribute("flexContainer", `flexContainerId-${node.id}`);
     return {
+        node,
         Direction (direction = "column") {
             if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
             let directions = {
@@ -719,7 +674,7 @@ const Container = (options)=>{
         },
         Flow (flow = {
             direction: "row",
-            wrap: "no-wrap"
+            wrap: "wrap"
         }) {
             if (!id) throw Error("No id specified");
             if (flow.wrap) this.Wrap(flow.wrap);
@@ -732,9 +687,6 @@ const Container = (options)=>{
             return this;
         },
         AlignContent (alignement = "center") {
-            console.log({
-                isElementWrapped
-            });
             if (!(node instanceof HTMLElement)) throw Error("Element must be an HTMLElement");
             if (!isElementWrapped || !(node.classList.contains("flex_wrap--wrap") || node.classList.contains("flex_wrap--wrap-reverse"))) throw Error("Element should have wrap or wrap-reverse class to use align-content, use Wrap() method to set wrap or wrap-reverse class to element before using AlignContent() method or use Flow() method to set both direction and wrap at once.");
             let alignements = {
@@ -753,6 +705,7 @@ const Container = (options)=>{
         Center (wrap = "wrap", alignContent = "center") {
             this.AlignItems();
             this.JustifyContent();
+            if (wrap) this.Wrap(wrap);
             this.AlignContent(alignContent);
             return this;
         },
@@ -827,7 +780,37 @@ const FlexCSS = {
     "flex-item--flex-grow": "flex-item--flex-grow"
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hkLmz":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"hkLmz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Item", ()=>Item);
@@ -909,6 +892,55 @@ const Item = (options)=>{
     };
 };
 
-},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
+},{"../CSSClasses":"dwadV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7wzGb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "registry", ()=>registry);
+parcelHelpers.export(exports, "NewNode", ()=>NewNode);
+parcelHelpers.export(exports, "CreateNumberOfNodes", ()=>CreateNumberOfNodes);
+const registry = {};
+const NewNode = (options)=>{
+    let { w , h , bg , c , txt  } = options;
+    let div = document.createElement("div");
+    const uuid = ()=>Math.random() * 10e10;
+    div.id = `${uuid()}`;
+    div.style.width = `${w?.[0]}${w?.[1]}`;
+    div.style.height = `${h?.[0]}${h?.[1]}`;
+    div.style.backgroundColor = bg ? bg : "black";
+    div.style.color = c ? c : "white";
+    div.style.boxShadow = "0 0 5px 0 " + (c ? c : bg);
+    div.style.borderRadius = "5px";
+    div.style.fontSize = "2rem";
+    if (txt) div.textContent = txt;
+    if (registry[div.id]) registry[div.id] = div;
+    return div;
+};
+const CreateNumberOfNodes = (n)=>{
+    let colors = [
+        "#fafafa",
+        "lightblue"
+    ];
+    let props = [];
+    for(let i = 1; i <= n; i++){
+        let bg = colors[i % 2 === 0 ? 0 : 1];
+        let color = colors[i % 2 === 0 ? 1 : 0];
+        props.push({
+            w: [
+                200,
+                "px"
+            ],
+            h: [
+                200,
+                "px"
+            ],
+            bg,
+            c: color,
+            txt: `${i}`
+        });
+    }
+    return props;
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cWaoa","1jwFz"], "1jwFz", "parcelRequire9b7d")
 
 //# sourceMappingURL=index.8e9bd240.js.map
