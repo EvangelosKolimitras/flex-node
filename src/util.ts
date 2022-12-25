@@ -1,12 +1,6 @@
 export const registry: { [key: HTMLElement['id']]: Node } = {};
 
-export const NewNode = (options: {
-	w?: [number, 'px' | '%'];
-	h?: [number, 'px' | '%'];
-	bg?: string;
-	c?: string;
-	txt?: string;
-}) => {
+export const NewNode = (options: { w?: [number, 'px' | '%']; h?: [number, 'px' | '%']; bg?: string; c?: string; txt?: string }) => {
 	const { w, h, bg, c, txt } = options;
 	const div = document.createElement('div');
 	const uuid = () => Math.random() * 10e10;

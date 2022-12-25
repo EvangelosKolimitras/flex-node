@@ -1,39 +1,36 @@
 {
-  "name": "smart-nodes",
-  "version": "0.0.1",
-  "description": "An intelligent way for DOM node alignment",
-  "main": "index.js",
-  "scripts": {
-    "start": "npx parcel index.html",
-    "tsc": "npx tsc --noEmit",
-    "fix-parcel": "npx parcel index.html --no-cache",
-	"lint": "npx eslint . --ext .ts",
-	"lint:fix": "npx eslint . --ext .ts --fix",
-	"prettier": "npx prettier --write .",
-	"prettier:check": "npx prettier --check .",
-	"prettier:fix": "npx prettier --write ."
-  },
-  "type": "module",
-  "keywords": [
-    "flexbox",
-    "typescript"
-  ],
-  "author": "Evangelos Kolimitras",
-  "license": "ISC",
-  "dependencies": {
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "parcel": "^2.8.0",
-    "typescript": "*"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.47.0",
-    "@typescript-eslint/parser": "^5.47.0",
-    "eslint": "^8.0.1",
-    "eslint-config-standard-with-typescript": "^24.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "prettier": "^2.8.1"
-  }
+	"name": "smart-nodes",
+	"version": "0.0.1",
+	"description": "An intelligent way for DOM node alignment",
+	"main": "index.js",
+	"scripts": {
+		"start": "npx parcel index.html",
+		"tsc": "npx tsc --noEmit",
+		"fix-parcel": "npx parcel index.html --no-cache",
+		"lint:fix": "npx eslint . --ext .ts --fix",
+		"prettier:fix": "npx prettier --write ."
+	},
+	"type": "module",
+	"keywords": [
+		"flexbox",
+		"typescript"
+	],
+	"author": "Evangelos Kolimitras",
+	"license": "ISC",
+	"dependencies": {
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"parcel": "^2.8.0",
+		"typescript": "*"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.47.0",
+		"@typescript-eslint/parser": "^5.47.0",
+		"eslint": "^8.0.1",
+		"eslint-config-standard-with-typescript": "^24.0.0",
+		"eslint-plugin-import": "^2.25.2",
+		"eslint-plugin-n": "^15.0.0",
+		"eslint-plugin-promise": "^6.0.0",
+		"prettier": "^2.8.1"
+	}
 }
