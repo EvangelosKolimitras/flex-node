@@ -1,7 +1,7 @@
 import { Container } from './Container/Container';
 import { Item } from './Item/Item';
 
-let algorithm: 'flexer' | 'grider' = 'grider';
+let algorithm: 'flexer' | 'grider' = 'flexer';
 let flexContainerIsActive = false;
 
 export function useAlgorithm(algo: 'flexer' | 'grider') {

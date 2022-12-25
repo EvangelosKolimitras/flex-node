@@ -1,12 +1,10 @@
-import { FlexContainer, FlexItem, useAlgorithm } from './src/box/index';
+import { FlexContainer, FlexItem } from './src/box/index';
 import { CreateNumberOfNodes, NewNode } from './src/util';
-
-useAlgorithm('flexer');
 
 const container = NewNode({ w: [800, 'px'], h: [800, 'px'], bg: 'white' });
 
 const h1 = document.createElement('h1');
-h1.innerText = 'Smart Nodes';
+h1.innerText = 'Smart Node layouting	';
 container.style.padding = '5px';
 document.body.id = 'some id...';
 
