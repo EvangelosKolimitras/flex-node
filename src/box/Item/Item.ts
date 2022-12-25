@@ -32,7 +32,7 @@ export const Item = (options: ItemOptions) => {
 
 	return {
 		AlignSelf(alignement: SelfAlignment = 'center') {
-			const a: any = {
+			const a: { [key: string]: string } = {
 				center: FlexCSS['flex_align-self--center'],
 				'flex-start': FlexCSS['flex_align-self--flex-start'],
 				'flex-end': FlexCSS['flex_align-self--flex-end'],
