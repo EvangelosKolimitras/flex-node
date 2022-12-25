@@ -27,7 +27,6 @@ CreateNumberOfNodes(9)
             FlexItem({ container: node, at: [3] })
                 .AlignSelf("flex-start");
         }
-        container.appendChild(node);
     });
 
 document.body.appendChild(h1);
