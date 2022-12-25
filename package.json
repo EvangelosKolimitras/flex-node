@@ -6,7 +6,12 @@
   "scripts": {
     "start": "npx parcel index.html",
     "tsc": "npx tsc --noEmit",
-    "fix-parcel": "npx parcel index.html --no-cache"
+    "fix-parcel": "npx parcel index.html --no-cache",
+	"lint": "npx eslint . --ext .ts",
+	"lint:fix": "npx eslint . --ext .ts --fix",
+	"prettier": "npx prettier --write .",
+	"prettier:check": "npx prettier --check .",
+	"prettier:fix": "npx prettier --write ."
   },
   "type": "module",
   "keywords": [
