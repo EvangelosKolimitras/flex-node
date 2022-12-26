@@ -4,42 +4,6 @@
 	flex-basis: auto;
 }
 
-html {
-	font-size: 62.5%;
-}
-
-* {
-	box-sizing: border-box;
-}
-
-body {
-	margin: 0;
-	padding: 0;
-	font-family: sans-serif;
-	width: 100vw;
-	height: 100vh;
-	background: linear-gradient(35deg, '#ededed, '#ededed);
-}
-
-h1,
-p {
-	font-weight: 400;
-	margin: 0;
-	padding: 0;
-	color: rgb(85, 85, 85);
-	letter-spacing: 1rem;
-}
-h1 {
-	font-size: 5rem;
-}
-p {
-	font-size: 1.5rem;
-}
-
-body:first-child {
-	transition: 1s all;
-}
-
 .flex {
 	display: flex;
 }
