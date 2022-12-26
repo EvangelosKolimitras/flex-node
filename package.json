@@ -1,7 +1,7 @@
 {
-	"name": "smart-nodes",
+	"name": "flexdomjs",
 	"version": "0.0.1",
-	"description": "An intelligent way for DOM node alignment",
+	"description": "A convinient way for DOM node layouting",
 	"main": "index.js",
 	"scripts": {
 		"start": "npx parcel index.html",
@@ -17,12 +17,7 @@
 	],
 	"author": "Evangelos Kolimitras",
 	"license": "ISC",
-	"dependencies": {
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"parcel": "^2.8.0",
-		"typescript": "*"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.47.0",
 		"@typescript-eslint/parser": "^5.47.0",
@@ -32,6 +27,10 @@
 		"eslint-plugin-import": "^2.25.2",
 		"eslint-plugin-n": "^15.0.0",
 		"eslint-plugin-promise": "^6.0.0",
-		"prettier": "^2.8.1"
+		"prettier": "^2.8.1",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"parcel": "^2.8.2",
+		"typescript": "^4.9.4"
 	}
 }
