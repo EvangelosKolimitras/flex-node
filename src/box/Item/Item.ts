@@ -61,35 +61,18 @@ export const Item = (options: ItemOptions) => {
 			return this;
 		},
 
-		Flex(flex: { grow?: number; shrink?: number; basis?: { value: number; unit: 'px' | '%' } }) {
+		Flex(flex: `${number} ${number} ${string}` | number = 1) {
 			if (!element) return;
 			if (!element.id) throw Error('No id specified');
 			if (!element.classList.contains('flex')) throw Error('Parent is not flexed');
 
-			const { grow, shrink, basis } = flex;
-
-			function growHandler(grow: number) {
-				if (!element) return;
-				element.classList.add('flex-item--flex-grow');
-				element.style.setProperty('--flex-grow', grow.toString());
+			if (typeof flex === 'number') {
+				element.style.flex = `${flex} 1 auto`;
+			} else {
+				element.style.flex = flex;
 			}
 
-			function shrinkHandler(shrink: number) {
-				if (!element) return;
-				element.classList.add('flex-item--flex-shrink');
-				element.style.setProperty('--flex-shrink', shrink.toString());
-			}
-
-			function basisHandler(options: { value: number; unit: 'px' | '%' }) {
-				if (!element) return;
-				const { value, unit } = options;
-				element.classList.add('flex-item--flex-basis');
-				element.style.setProperty('--flex-basis', unit ? value.toString().concat(unit) : value.toString());
-			}
-
-			if (grow) growHandler(grow);
-			if (shrink) shrinkHandler(shrink);
-			if (basis) basisHandler(basis);
+			return this;
 		},
 	};
 };
