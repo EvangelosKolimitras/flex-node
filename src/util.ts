@@ -14,10 +14,9 @@ export const NewNode = (options: { w?: [number, 'px' | '%']; h?: [number, 'px' |
 	div.id = `${uuid()}`;
 	div.style.width = `${w?.[0]}${w?.[1]}`;
 	div.style.height = `${h?.[0]}${h?.[1]}`;
-	div.style.backgroundColor = bg || 'black';
+	div.style.backgroundColor = bg || '#404040';
 	div.style.color = c || 'white';
-	div.style.boxShadow = '0 0 5px 0 ' + (c || bg);
-	div.style.borderRadius = '5px';
+	div.style.borderRadius = '3px';
 	div.style.fontSize = '2rem';
 	if (txt) {
 		div.textContent = txt;
@@ -29,7 +28,7 @@ export const NewNode = (options: { w?: [number, 'px' | '%']; h?: [number, 'px' |
 };
 
 export const CreateNumberOfNodes = (n: number) => {
-	const colors = ['#fafafa', 'lightblue'];
+	const colors = ['#484848', '#ededed'];
 	const props: {
 		w?: [number, 'px' | '%'];
 		h?: [number, 'px' | '%'];
