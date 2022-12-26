@@ -23,6 +23,14 @@ flexedContainer?.Direction('row').JustifyContent().AlignItems().Gap('20px');
 FlexItem({
 	container,
 	at: 1,
-})?.Flex('3 2 auto');
+})?.Flex(1);
+FlexItem({
+	container,
+	at: 3,
+})?.Flex(4);
+FlexItem({
+	container,
+	at: 2,
+})?.Flex(1);
 container.style.resize = 'horizontal';
 container.style.overflow = 'auto';

@@ -61,16 +61,28 @@ export const Item = (options: ItemOptions) => {
 			return this;
 		},
 
-		Flex(flex: `${number} ${number} ${string}` | number = 0) {
+		Flex(flex: (`${number} ${number} ${string}` | `${number} ${number}` | `${number}`) | number = 0) {
 			if (!element) return;
 			if (!element.id) throw Error('No id specified');
 			if (!element.classList.contains('flex')) throw Error('Parent is not flexed');
 
 			if (typeof flex === 'number') {
 				element.style.flex = `${flex} 1 auto`;
-			} else {
-				element.style.flex = flex;
+				return this;
 			}
+
+			let tokens = flex.toString().split(' ');
+
+			if (tokens.length === 1) {
+				tokens = [tokens[0], '1', 'auto'];
+			} else if (tokens.length === 2) {
+				tokens = [tokens[0], tokens[1], 'auto'];
+			} else if (tokens.length === 3) {
+				tokens = [tokens[0], tokens[1], tokens[2]];
+			} else {
+				throw Error('Invalid flex property');
+			}
+			element.style.flex = tokens.join(' ');
 
 			return this;
 		},
