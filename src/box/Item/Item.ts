@@ -61,7 +61,7 @@ export const Item = (options: ItemOptions) => {
 			return this;
 		},
 
-		Flex(flex: `${number} ${number} ${string}` | number = 1) {
+		Flex(flex: `${number} ${number} ${string}` | number = 0) {
 			if (!element) return;
 			if (!element.id) throw Error('No id specified');
 			if (!element.classList.contains('flex')) throw Error('Parent is not flexed');

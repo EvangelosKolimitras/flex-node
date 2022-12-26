@@ -19,13 +19,10 @@ const flexedContainer = FlexContainer(container);
 flexBody?.Direction().JustifyContent().AlignItems().Gap('20px');
 
 flexedContainer?.Direction('row').JustifyContent().AlignItems().Gap('20px');
-FlexItem({
-	container,
-	at: 2,
-})?.Flex('0 8 800px');
+
 FlexItem({
 	container,
 	at: 1,
-})?.Flex('0 4 auto');
+})?.Flex('3 2 auto');
 container.style.resize = 'horizontal';
 container.style.overflow = 'auto';
