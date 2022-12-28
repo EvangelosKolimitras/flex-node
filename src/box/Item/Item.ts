@@ -1,4 +1,8 @@
-import { FlexCSS } from '../CSSClasses';
+const ErrorReport = {
+	outOfBounds({ len, at }: { len: number; at: number }) {
+		throw Error(`Index out of bounds. Child count length: ${len}, Index passed: ${at}`);
+	},
+};
 export interface ItemOptions {
 	container: Node;
 	at: number | Array<number>;
@@ -13,9 +17,9 @@ export const Item = (options: ItemOptions) => {
 	let elements: Array<HTMLElement> | null = null;
 
 	if (atIsANumber(at)) {
-		if (at < 1 || at > len) throw Error(`Index out of bounds. Child count length: ${len}, Index passed: ${at}`);
+		if (at < 1 || at > len) ErrorReport.outOfBounds({ len, at });
 		element = childNodes[at - 1];
-		element.classList.add(FlexCSS['flex_item']);
+		element.style.setProperty('flex', '0 1 auto');
 		elements = null;
 	} else {
 		let [start, end] = at;
@@ -32,31 +36,15 @@ export const Item = (options: ItemOptions) => {
 
 	return {
 		AlignSelf(alignement: SelfAlignment = 'center') {
-			const a: { [key: string]: string } = {
-				center: FlexCSS['flex_align-self--center'],
-				'flex-start': FlexCSS['flex_align-self--flex-start'],
-				'flex-end': FlexCSS['flex_align-self--flex-end'],
-				stretch: FlexCSS['flex_align-self--stretch'],
-				baseline: FlexCSS['flex_align-self--baseline'],
-			};
-
-			if (elements === null)
-				for (const key in a) {
-					if (element) element.classList.remove(a[key]);
-				}
-			else for (const el of elements) for (const key in a) el.classList.remove(a[key]);
-
-			if (elements === null) {
-				if (element) element.classList.add(a[alignement] || a['center']);
-			} else for (const el of elements) el.classList.add(a[alignement] || a['center']);
-
+			if (element) element.style.setProperty('align-self', alignement);
+			else if (elements) for (const el of elements) el.style.setProperty('align-self', alignement);
 			return this;
 		},
 		Order(order = 0) {
 			if (element) {
 				if (!element.id) throw Error('No id specified');
-				if (!element.classList.contains('flex')) throw Error('Parent is not flexed');
-				element.style.order = `${order}`;
+				if (element.style.getPropertyValue('display') !== 'flex') throw Error('Parent is not flexed');
+				element.style.setProperty('order', `${order}`);
 			}
 			return this;
 		},
@@ -64,10 +52,10 @@ export const Item = (options: ItemOptions) => {
 		Flex(flex: (`${number} ${number} ${string}` | `${number} ${number}` | `${number}`) | number = 0) {
 			if (!element) return;
 			if (!element.id) throw Error('No id specified');
-			if (!element.classList.contains('flex')) throw Error('Parent is not flexed');
+			if (element.style.getPropertyValue('display') !== 'flex') throw Error('Parent is not flexed');
 
 			if (typeof flex === 'number') {
-				element.style.flex = `${flex} 1 auto`;
+				element.style.setProperty('flex', `${flex} 1 auto`);
 				return this;
 			}
 
@@ -82,8 +70,7 @@ export const Item = (options: ItemOptions) => {
 			} else {
 				throw Error('Invalid flex property');
 			}
-			element.style.flex = tokens.join(' ');
-
+			element.style.setProperty('flex', tokens.join(' '));
 			return this;
 		},
 	};
