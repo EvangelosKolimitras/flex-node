@@ -1,4 +1,3 @@
-import { FlexCSS } from '../CSSClasses';
 let isElementWrapped = false;
 export const Container = (options: { node: Node }) => {
 	const { node } = options;
@@ -7,62 +6,32 @@ export const Container = (options: { node: Node }) => {
 	const id = node.id;
 	if (!id) throw Error('No id specified');
 
-	node.classList.add(FlexCSS.flex);
+	node.style.setProperty('display', 'flex');
 	node.setAttribute('flexContainer', `flexContainerId-${node.id}`);
 
 	return {
 		node,
 		Direction(direction: FlexDirection = 'column') {
 			if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
-			const directions: { [key: string]: string } = {
-				column: FlexCSS['flex_direction--column'],
-				row: FlexCSS['flex_direction--row'],
-				'row-reverse': FlexCSS['flex_direction--row-reverse'],
-				'column-reverse': FlexCSS['flex_direction--column-reverse'],
-			};
-			for (const key in directions) node.classList.remove(directions[key]);
-			node.classList.add(directions[direction] || directions['column']);
+			node.style.setProperty('flex-direction', direction);
 			return this;
 		},
 		AlignItems(alignement: FlexAlignment = 'center') {
 			if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
-			const alignements: { [key: string]: string } = {
-				center: FlexCSS['flex_align-items--center'],
-				'flex-start': FlexCSS['flex_align-items--flex-start'],
-				'flex-end': FlexCSS['flex_align-items--flex-end'],
-				baseline: FlexCSS['flex_align-items--baseline'],
-				stretch: FlexCSS['flex_align-items--stretch'],
-			};
-			for (const key in alignements) {
-				node.classList.remove(alignements[key]);
-			}
-			node.classList.add(alignements[alignement] || alignements['center']);
+			node.style.removeProperty('align-items');
+			node.style.setProperty('align-items', alignement);
 			return this;
 		},
 		JustifyContent(justification: FlexJustification = 'center') {
-			// implement start-end left-right
 			if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
-			const justifications: { [key: string]: string } = {
-				center: FlexCSS['flex_justify-content--center'],
-				'flex-start': FlexCSS['flex_justify-content--flex-start'],
-				'flex-end': FlexCSS['flex_justify-content--flex-end'],
-				'space-between': FlexCSS['flex_justify-content--space-between'],
-				'space-around': FlexCSS['flex_justify-content--space-around'],
-				'space-evenly': FlexCSS['flex_justify-content--space-evenly'],
-			};
-			for (const key in justifications) node.classList.remove(justifications[key]);
-			node.classList.add(justifications[justification] || justifications['center']);
+			node.style.removeProperty('justify-content');
+			node.style.setProperty('justify-content', justification);
 			return this;
 		},
 		Wrap(wrap: FlexWrap = 'wrap') {
 			if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
-			const wraps: { [key: string]: string } = {
-				wrap: FlexCSS['flex_wrap--wrap'],
-				'no-wrap': FlexCSS['flex_wrap--no-wrap'],
-				'wrap-reverse': FlexCSS['flex_wrap--wrap-reverse'],
-			};
-			for (const key in wraps) node.classList.remove(wraps[key]);
-			node.classList.add(wraps[wrap] || wraps['no-wrap']);
+			node.style.removeProperty('flex-wrap');
+			node.style.setProperty('flex-wrap', wrap);
 			isElementWrapped = true;
 			return this;
 		},
@@ -79,29 +48,21 @@ export const Container = (options: { node: Node }) => {
 		},
 		Gap(gap?: `${string} ${string}` | string) {
 			if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
-			node.style.gap = gap || '0px';
+			node.style.removeProperty('gap');
+			node.style.setProperty('gap', gap || '0px');
 			return this;
 		},
 		AlignContent(alignement: AlignContent = 'center') {
 			if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
-			if (!isElementWrapped || !(node.classList.contains('flex_wrap--wrap') || node.classList.contains('flex_wrap--wrap-reverse')))
+			if (!isElementWrapped || node.style.getPropertyValue('flex-wrap') === 'no-wrap')
 				throw Error(
-					'Element should have wrap or wrap-reverse class to use align-content, use Wrap() method to set wrap or wrap-reverse class to element before using AlignContent() method or use Flow() method to set both direction and wrap at once.'
+					`[${alignement} - ${node.style.getPropertyValue('flex-wrap')}]
+					Element should have flex-wrap: wrap or wrap-reverse in order to use align-content.
+					* use Wrap() to set wrap or wrap-reverse to element before using AlignContent() or 
+					* use Flow() to set both direction and wrap at once.`
 				);
-
-			const alignements: { [key: string]: string } = {
-				center: FlexCSS['flex_align-content--center'],
-				'flex-start': FlexCSS['flex_align-content--flex-start'],
-				'flex-end': FlexCSS['flex_align-content--flex-end'],
-				'space-between': FlexCSS['flex_align-content--space-between'],
-				'space-around': FlexCSS['flex_align-content--space-around'],
-				'space-evenly': FlexCSS['flex_align-content--space-evenly'],
-				stretch: FlexCSS['flex_align-content--stretch'],
-			};
-
-			for (const key in alignements) node.classList.remove(alignements[key]);
-
-			node.classList.add(alignements[alignement] || alignements['center']);
+			node.style.removeProperty('align-content');
+			node.style.setProperty('align-content', alignement);
 			return this;
 		},
 		Center(wrap: FlexWrap = 'wrap', alignContent: AlignContent = 'center') {
