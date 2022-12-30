@@ -66,7 +66,7 @@ export const Container = (options: { node: Node }) => {
 			node.style.setProperty('align-content', alignement);
 			return this;
 		},
-		Center({ position, wrap = 'wrap', alignContent = 'center' }: { position?: 'left' | 'right' | 'bottom' | 'top'; wrap?: FlexWrap; alignContent?: AlignContent }) {
+		Center({ position, wrap = 'wrap', alignContent = 'center' }: { position?: 'center' | 'left' | 'right' | 'bottom' | 'top'; wrap?: FlexWrap; alignContent?: AlignContent }) {
 			switch (position) {
 				case 'left':
 					this.AlignItems();
