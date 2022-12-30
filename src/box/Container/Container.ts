@@ -5,9 +5,6 @@ export const Container = (options: { node: Node }) => {
 	const { node } = options;
 	if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
 
-	const id = node.id;
-	if (!id) throw Error('No id specified');
-
 	node.style.setProperty('display', 'flex');
 	node.setAttribute('flexContainer', `flexContainerId-${node.id}`);
 
@@ -44,7 +41,6 @@ export const Container = (options: { node: Node }) => {
 				wrap: 'wrap',
 			}
 		) {
-			if (!id) throw Error('No id specified');
 			if (flow.wrap) this.Wrap(flow.wrap);
 			if (flow.direction) this.Direction(flow.direction);
 			return this;
