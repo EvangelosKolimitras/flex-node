@@ -13,6 +13,7 @@ export const Container = (options: { node: Node }) => {
 		node,
 		Direction(direction: FlexDirection = 'column') {
 			if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
+			node.style.removeProperty('flex-direction');
 			node.style.setProperty('flex-direction', direction);
 			return this;
 		},
@@ -65,39 +66,39 @@ export const Container = (options: { node: Node }) => {
 			node.style.setProperty('align-content', alignement);
 			return this;
 		},
-		Center(wrap: FlexWrap = 'wrap', alignContent: AlignContent = 'center') {
-			this.AlignItems();
-			this.JustifyContent();
-			if (wrap) this.Wrap(wrap);
-			this.AlignContent(alignContent);
-			return this;
-		},
-		CenterLeft(wrap: FlexWrap = 'no-wrap', alignContent: AlignContent = 'center') {
-			this.AlignItems();
-			this.JustifyContent('flex-start');
-			if (wrap) this.Wrap(wrap);
-			if (wrap !== 'no-wrap') this.AlignContent(alignContent);
-			return this;
-		},
-		CenterRight(wrap: FlexWrap = 'no-wrap', alignContent: AlignContent = 'center') {
-			this.AlignItems();
-			this.JustifyContent('flex-end');
-			if (wrap) this.Wrap(wrap);
-			if (wrap !== 'no-wrap') this.AlignContent(alignContent);
-			return this;
-		},
-		CenterTop(wrap: FlexWrap = 'no-wrap', alignContent: AlignContent = 'center') {
-			this.AlignItems('flex-start');
-			this.JustifyContent();
-			if (wrap) this.Wrap(wrap);
-			if (wrap !== 'no-wrap') this.AlignContent(alignContent);
-			return this;
-		},
-		CenterBottom(wrap: FlexWrap = 'no-wrap', alignContent: AlignContent = 'center') {
-			this.AlignItems('flex-end');
-			this.JustifyContent();
-			if (wrap) this.Wrap(wrap);
-			if (wrap !== 'no-wrap') this.AlignContent(alignContent);
+		Center({ position, wrap = 'wrap', alignContent = 'center' }: { position?: 'left' | 'right' | 'bottom' | 'top'; wrap?: FlexWrap; alignContent?: AlignContent }) {
+			switch (position) {
+				case 'left':
+					this.AlignItems();
+					this.JustifyContent('flex-start');
+					if (wrap) this.Wrap(wrap);
+					if (wrap !== 'no-wrap') this.AlignContent(alignContent);
+					return this;
+				case 'right':
+					this.AlignItems();
+					this.JustifyContent('flex-end');
+					if (wrap) this.Wrap(wrap);
+					if (wrap !== 'no-wrap') this.AlignContent(alignContent);
+					return this;
+				case 'top':
+					this.AlignItems('flex-start');
+					this.JustifyContent();
+					if (wrap) this.Wrap(wrap);
+					if (wrap !== 'no-wrap') this.AlignContent(alignContent);
+					return this;
+				case 'bottom':
+					this.AlignItems('flex-end');
+					this.JustifyContent();
+					if (wrap) this.Wrap(wrap);
+					if (wrap !== 'no-wrap') this.AlignContent(alignContent);
+					return this;
+				default:
+					this.AlignItems();
+					this.JustifyContent();
+					if (wrap) this.Wrap(wrap);
+					this.AlignContent(alignContent);
+					break;
+			}
 			return this;
 		},
 	};

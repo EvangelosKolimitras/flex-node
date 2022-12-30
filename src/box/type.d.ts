@@ -1,4 +1,4 @@
-interface Flexbox {
+declare interface Flexbox {
 	baseline: 'baseline';
 	center: 'center';
 	'column-reverse': 'column-reverse';
@@ -15,9 +15,9 @@ interface Flexbox {
 	'wrap-reverse': 'wrap-reverse';
 	wrap: 'wrap';
 }
-type FlexDirection = keyof Pick<Flexbox, 'row' | 'column' | 'row-reverse' | 'column-reverse'>;
-type FlexAlignment = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'stretch' | 'baseline'>;
-type SelfAlignment = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'stretch' | 'baseline'>;
-type FlexJustification = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'space-between' | 'space-around' | 'space-evenly'>;
-type FlexWrap = keyof Pick<Flexbox, 'wrap' | 'no-wrap' | 'wrap-reverse'>;
-type AlignContent = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch'>;
+declare type FlexDirection = keyof Pick<Flexbox, 'row' | 'column' | 'row-reverse' | 'column-reverse'>;
+declare type FlexAlignment = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'stretch' | 'baseline'>;
+declare type SelfAlignment = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'stretch' | 'baseline'>;
+declare type FlexJustification = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'space-between' | 'space-around' | 'space-evenly'>;
+declare type FlexWrap = keyof Pick<Flexbox, 'wrap' | 'no-wrap' | 'wrap-reverse'>;
+declare type AlignContent = keyof Pick<Flexbox, 'flex-end' | 'center' | 'flex-start' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch'>;
