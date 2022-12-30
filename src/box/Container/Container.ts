@@ -1,3 +1,5 @@
+import { AlignContent, FlexAlignment, FlexDirection, FlexJustification, FlexWrap, ICenterOptions } from 'flexdomjs';
+
 let isElementWrapped = false;
 export const Container = (options: { node: Node }) => {
 	const { node } = options;
@@ -66,8 +68,17 @@ export const Container = (options: { node: Node }) => {
 			node.style.setProperty('align-content', alignement);
 			return this;
 		},
-		Center({ position, wrap = 'wrap', alignContent = 'center' }: { position?: 'center' | 'left' | 'right' | 'bottom' | 'top'; wrap?: FlexWrap; alignContent?: AlignContent }) {
+		Center({ position, wrap = 'wrap', alignContent = 'center' }: ICenterOptions) {
+			const CenterCase = () => {
+				this.AlignItems();
+				this.JustifyContent();
+				if (wrap) this.Wrap(wrap);
+				this.AlignContent(alignContent);
+				return this;
+			};
 			switch (position) {
+				case 'center':
+					return CenterCase();
 				case 'left':
 					this.AlignItems();
 					this.JustifyContent('flex-start');
@@ -93,13 +104,8 @@ export const Container = (options: { node: Node }) => {
 					if (wrap !== 'no-wrap') this.AlignContent(alignContent);
 					return this;
 				default:
-					this.AlignItems();
-					this.JustifyContent();
-					if (wrap) this.Wrap(wrap);
-					this.AlignContent(alignContent);
-					break;
+					return CenterCase();
 			}
-			return this;
 		},
 	};
 };
