@@ -1,8 +1,8 @@
 /// <reference types="node" />
 
 declare module 'flexdomjs' {
-	export function FlexContainer(node: Node): FlexContainer;
-	export function FlexItem(options: { container: Node; at: number | Array<number> }): FlexItem;
+	export function FlexContainer(node: Node): FlexContainerReturnType;
+	export function FlexItem(options: { container: Node; at: number | Array<number> }): FlexItemReturnType;
 }
 
 interface Flexbox {
