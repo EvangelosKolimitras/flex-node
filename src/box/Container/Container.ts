@@ -63,7 +63,9 @@ export const Container = (options: { node: Node }): FlexContainerReturnType => {
 			node.style.setProperty('align-content', alignement);
 			return this;
 		},
-		Center({ position, wrap = 'wrap', alignContent = 'center' }: ICenterOptions) {
+		Center(options?: ICenterOptions) {
+			const { position = 'center', wrap = 'wrap', alignContent = 'center' } = options || {};
+
 			const CenterCase = () => {
 				this.AlignItems();
 				this.JustifyContent();
