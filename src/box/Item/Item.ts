@@ -4,7 +4,12 @@ const atIsANumber = (at: ItemOptions['at']): at is number => typeof at === 'numb
 export const Item = (options: ItemOptions): FlexItemReturnType => {
 	const { container, at } = options;
 
-	const childNodes = <Array<HTMLElement>>Array.from(container.childNodes).filter((node) => node.nodeType === 1);
+	const childNodes = <Array<HTMLElement>>Array.from(container.childNodes)
+		.filter((node) => node.nodeType === 1)
+		.filter((node) => {
+			if (!(<HTMLElement>node).getAttribute('flexItem')) return false;
+			return true;
+		});
 	const len = childNodes.length;
 	let element: HTMLElement | null = null;
 	let elements: Array<HTMLElement> | null = null;
