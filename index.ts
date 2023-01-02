@@ -1,3 +1,1 @@
-import { FlexContainer, FlexItem } from 'flexdomjs';
-
-export { FlexContainer, FlexItem };
+export { FlexContainer, FlexItem } from 'flexdomjs';
