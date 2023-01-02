@@ -1,2 +1,4 @@
-export { FlexContainer } from './src/box/Container/Container';
-export { FlexItem } from './src/box/Item/Item';
+import { FlexContainer } from './src/box/Container/Container';
+import { FlexItem } from './src/box/Item/Item';
+
+export { FlexContainer, FlexItem };
