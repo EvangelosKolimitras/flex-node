@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-declare module 'fia' {
+declare module 'flexdomjs' {
 	export function FlexContainer(node: Node): FlexContainer;
 	export function FlexItem(options: { container: Node; at: number | Array<number> }): FlexItem;
 }

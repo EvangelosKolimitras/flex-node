@@ -1,5 +1,8 @@
 /** void */
 
+/**
+ * This is an expirimental library to help with flexbox layouts in the browser.
+ */
 import { FlexContainer } from './src/box/index';
 
 const divs = Array.from({ length: 4 }, () => document.createElement('div'));
