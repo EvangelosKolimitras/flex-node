@@ -1,4 +1,3 @@
-import { FlexContainer } from './src/box/Container/Container';
-import { FlexItem } from './src/box/Item/Item';
+import { FlexContainer, FlexItem } from 'flexdomjs';
 
 export { FlexContainer, FlexItem };
