@@ -1,8 +1,8 @@
 {
 	"name": "flexdomjs",
-	"version": "0.0.26",
+	"version": "0.0.27",
 	"description": "A convinient way for DOM node layout",
-	"main": "dist/index.js",
+	"main": "dist/src/index.js",
 	"types": "./@types/index.d.ts",
 	"scripts": {
 		"start": "npx parcel index.html",
