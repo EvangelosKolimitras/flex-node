@@ -1,6 +1,6 @@
 {
 	"name": "flexdomjs",
-	"version": "0.0.25",
+	"version": "0.0.26",
 	"description": "A convinient way for DOM node layout",
 	"main": "dist/index.js",
 	"types": "./@types/index.d.ts",

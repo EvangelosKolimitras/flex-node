@@ -1,4 +1,8 @@
-import { ErrorReport } from './src/ErrorReport/ErrorReport';
+export const ErrorReport = {
+	outOfBounds({ len, at }: IOutOfBounds) {
+		throw Error(`Index out of bounds. Child count length: ${len}, Index passed: ${at}`);
+	},
+};
 
 let isElementWrapped = false;
 
