@@ -41,7 +41,6 @@ export const Item = (options: ItemOptions): FlexItemReturnType => {
 		},
 		Order(order = 0) {
 			if (element) {
-				if (!element.id) throw Error('No id specified');
 				if (element.style.getPropertyValue('display') !== 'flex') throw Error('Parent is not flexed');
 				element.style.setProperty('order', `${order}`);
 			}
@@ -50,7 +49,6 @@ export const Item = (options: ItemOptions): FlexItemReturnType => {
 
 		Flex(flex: FlexOptions = 0) {
 			if (!element) return;
-			if (!element.id) throw Error('No id specified');
 			if (element.style.getPropertyValue('display') !== 'flex') throw Error('Parent is not flexed');
 
 			if (typeof flex === 'number') {
