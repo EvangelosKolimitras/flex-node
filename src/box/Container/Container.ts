@@ -7,6 +7,15 @@ export const Container = (options: { node: Node }): FlexContainerReturnType => {
 	node.style.setProperty('display', 'flex');
 	node.setAttribute('flexContainer', `flexContainerId-${node.id}`);
 
+	for (let i = 0; i < node.childNodes.length; i++) {
+		if (!(node.childNodes[i] instanceof HTMLElement)) continue;
+		if ((<HTMLElement>node.childNodes[i]).tagName === 'SCRIPT' || (<HTMLElement>node.childNodes[i]).tagName === 'STYLE') continue;
+		if (!(node.childNodes[i] instanceof HTMLElement)) continue;
+		if ((<HTMLElement>node.childNodes[i]).parentElement?.getAttribute('flexContainer')) {
+			(<HTMLElement>node.childNodes[i]).setAttribute('flexItem', `true`);
+		}
+	}
+
 	return {
 		node,
 		Direction(direction: FlexDirection = 'column') {
