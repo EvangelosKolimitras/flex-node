@@ -17,7 +17,7 @@ export function FlexContainer(node: Node) {
 	}
 }
 
-export function FlexItem(options: { container: Node; at: number | Array<number> }) {
+export function FlexItem(options: ItemOptions) {
 	if (algorithm !== 'flexer' && algorithm !== 'grider') throw new Error('No algorithm set');
 	if (algorithm === 'grider') throw new Error('Grider algorithm does not support FlexItem');
 	if (algorithm === 'flexer' && !flexContainerIsActive) throw new Error('FlexItem must be called after FlexContainer');

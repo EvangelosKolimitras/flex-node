@@ -1,7 +1,5 @@
-import { AlignContent, FlexAlignment, FlexDirection, FlexJustification, FlexWrap, ICenterOptions } from 'flexdomjs';
-
 let isElementWrapped = false;
-export const Container = (options: { node: Node }) => {
+export const Container = (options: { node: Node }): FlexContainerReturnType => {
 	const { node } = options;
 	if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
 

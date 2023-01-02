@@ -23,5 +23,3 @@ wrapper.id = 'wrapper';
 document.body.appendChild(wrapper);
 wrapper.style.height = '100vh';
 wrapper.style.backgroundColor = 'lightgray';
-
-FlexContainer(wrapper)?.Center({ wrap: 'no-wrap' });

@@ -1,13 +1,7 @@
-import { FlexOptions, IOutOfBounds, ItemOptions, SelfAlignment } from 'flexdomjs';
-
-const ErrorReport = {
-	outOfBounds({ len, at }: IOutOfBounds) {
-		throw Error(`Index out of bounds. Child count length: ${len}, Index passed: ${at}`);
-	},
-};
+import { ErrorReport } from '../../ErrorReport/ErrorReport';
 
 const atIsANumber = (at: ItemOptions['at']): at is number => typeof at === 'number';
-export const Item = (options: ItemOptions) => {
+export const Item = (options: ItemOptions): FlexItemReturnType => {
 	const { container, at } = options;
 
 	const childNodes = <Array<HTMLElement>>Array.from(container.childNodes);
@@ -34,6 +28,7 @@ export const Item = (options: ItemOptions) => {
 	}
 
 	return {
+		node: element || elements,
 		AlignSelf(alignement: SelfAlignment = 'center') {
 			if (element) element.style.setProperty('align-self', alignement);
 			else if (elements) for (const el of elements) el.style.setProperty('align-self', alignement);
