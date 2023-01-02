@@ -1,5 +1,6 @@
 let isElementWrapped = false;
-export const Container = (options: { node: Node }): FlexContainerReturnType => {
+
+export const FlexContainer = (options: { node: Node }): FlexContainerReturnType => {
 	const { node } = options;
 	if (!(node instanceof HTMLElement)) throw Error('Element must be an HTMLElement');
 

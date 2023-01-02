@@ -1,7 +1,7 @@
 import { ErrorReport } from '../../ErrorReport/ErrorReport';
 
 const atIsANumber = (at: ItemOptions['at']): at is number => typeof at === 'number';
-export const Item = (options: ItemOptions): FlexItemReturnType => {
+export const FlexItem = (options: ItemOptions): FlexItemReturnType => {
 	const { container, at } = options;
 
 	const childNodes = <Array<HTMLElement>>Array.from(container.childNodes);
