@@ -39,21 +39,21 @@ interface ICenterOptions {
 
 interface FlexContainerReturnType {
 	node: Node;
-	Direction(direction?: FlexDirection): unknown;
-	AlignItems(alignement?: FlexAlignment): unknown;
-	JustifyContent(justification?: FlexJustification): unknown;
-	Wrap(wrap?: FlexWrap): unknown;
-	Flow(flow?: { direction?: FlexDirection; wrap?: FlexWrap }): unknown;
-	Gap(gap?: `${string} ${string}` | string): unknown;
-	AlignContent(alignement?: AlignContent): unknown;
-	Center(options?: ICenterOptions): unknown;
+	Direction(direction?: FlexDirection): FlexContainerReturnType;
+	AlignItems(alignement?: FlexAlignment): FlexContainerReturnType;
+	JustifyContent(justification?: FlexJustification): FlexContainerReturnType;
+	Wrap(wrap?: FlexWrap): FlexContainerReturnType;
+	Flow(flow?: { direction?: FlexDirection; wrap?: FlexWrap }): FlexContainerReturnType;
+	Gap(gap?: `${string} ${string}` | string): FlexContainerReturnType;
+	AlignContent(alignement?: AlignContent): FlexContainerReturnType;
+	Center(options?: ICenterOptions): FlexContainerReturnType;
 }
 
 interface FlexItemReturnType {
 	node: Node | Array<Node> | null;
-	AlignSelf(alignement?: SelfAlignment): unknown;
-	Order(order?: number): unknown;
-	Flex(flex?: FlexOptions): unknown;
+	AlignSelf(alignement?: SelfAlignment): FlexItemReturnType;
+	Order(order?: number): FlexItemReturnType;
+	Flex(flex?: FlexOptions): FlexItemReturnType;
 }
 
 type FlexOptions = (`${number} ${number} ${string}` | `${number} ${number}` | `${number}`) | number;
