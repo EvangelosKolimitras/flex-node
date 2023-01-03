@@ -41,34 +41,33 @@ export const Item = (options: ItemOptions): FlexItemReturnType => {
 		},
 		Order(order = 0) {
 			if (element) {
-				if (element.style.getPropertyValue('display') !== 'flex') throw Error('Parent is not flexed');
+				if (!(<HTMLElement>element.parentElement).getAttribute('flexContainer')) throw Error('Parent is not flexed');
 				element.style.setProperty('order', `${order}`);
 			}
 			return this;
 		},
 
 		Flex(flex: FlexOptions = 0) {
-			if (!element) return;
-			if (element.style.getPropertyValue('display') !== 'flex') throw Error('Parent is not flexed');
-
-			if (typeof flex === 'number') {
-				element.style.setProperty('flex', `${flex} 1 auto`);
-				return this;
-			}
-
-			let tokens = flex.toString().split(' ');
-
-			if (tokens.length === 1) {
-				tokens = [tokens[0], '1', 'auto'];
-			} else if (tokens.length === 2) {
-				tokens = [tokens[0], tokens[1], 'auto'];
-			} else if (tokens.length === 3) {
-				tokens = [tokens[0], tokens[1], tokens[2]];
-			} else {
-				throw Error('Invalid flex property');
-			}
-			element.style.setProperty('flex', tokens.join(' '));
-			return this;
+			const elementFlexHandler = (element: HTMLElement) => {
+				if (!(<HTMLElement>element.parentElement).getAttribute('flexContainer')) throw Error('Parent is not flexed');
+				if (typeof flex === 'number') {
+					element.style.setProperty('flex', `${flex} 1 auto`);
+					let tokens = flex.toString().split(' ');
+					if (tokens.length === 1) {
+						tokens = [tokens[0], '1', 'auto'];
+					} else if (tokens.length === 2) {
+						tokens = [tokens[0], tokens[1], 'auto'];
+					} else if (tokens.length === 3) {
+						tokens = [tokens[0], tokens[1], tokens[2]];
+					} else {
+						throw Error('Invalid flex property');
+					}
+					element.style.setProperty('flex', tokens.join(' '));
+					return this;
+				}
+			};
+			if (element) return elementFlexHandler(element);
+			if (elements) for (const element of elements) return elementFlexHandler(element);
 		},
 	};
 };
